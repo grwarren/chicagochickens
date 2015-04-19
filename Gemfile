@@ -43,4 +43,5 @@ group :development, :test do
   gem 'mongo_mapper'
   gem 'bson_ext'
   gem 'rspec'
+  gem 'rspec-rails'
 end
