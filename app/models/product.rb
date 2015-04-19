@@ -4,6 +4,4 @@ class Product
   key :name, String
   key :unit, String
   timestamps!
-
-  embedded_in :order
 end

@@ -1,0 +1,7 @@
+h1
+  This is the new order page
+
+= form_for @order, url: {action: "create"}, html: {class: "nifty_form"} do |f|
+  = f.text_field :quantity
+  = f.text_field :delivery_date
+  = f.submit "Create"

@@ -44,4 +44,7 @@ group :development, :test do
   gem 'bson_ext'
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'slim'
+  gem 'rspec-expectations'
+  gem "database_cleaner", '1.0.0.RC1'
 end
