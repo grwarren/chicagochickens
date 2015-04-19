@@ -1,7 +1,7 @@
 class User
   include MongoMapper::Document
 
-  key :id, Integer
+  key :user_id, Integer
   key :name, String
   timestamps!
 
