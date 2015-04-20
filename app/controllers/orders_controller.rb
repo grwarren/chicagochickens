@@ -12,7 +12,10 @@ class OrdersController < ApplicationController
    end
 
   def create
-    @order = Order.new(order_params.merge(user_id: @current_user.user_id ))
+    product = Product.find_by_id(params[:order][:product])
+    @order = Order.new(order_params.merge(user: @current_user, products: []))
+    @order.products << product.attributes
+
     if @order.save
       redirect_to user_orders_path(user_id: @current_user.user_id) , notice: 'Your order has been recieved'
     else
@@ -22,6 +25,6 @@ class OrdersController < ApplicationController
 
 private
   def order_params
-    params.require(:order).permit(:quantity, :product, :delivery_date, :user_id)
+    params.require(:order).permit(:quantity, :delivery_date)
   end
 end

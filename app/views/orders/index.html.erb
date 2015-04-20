@@ -1,17 +1,28 @@
 <h1> Current Orders </h1>
 
 <% if !@orders.empty? %>
-  <table>
+  <table class="table">
+    <tr>
+      <td>
+        Product
+      </td>
+      <td>
+        Quantity
+      </td>
+      <td>
+        User
+      </td>
+    </tr>
     <% @orders.each do |order| %>
         <tr>
           <td>
-            <%= order.product %>
+            <%= order.products.first["name"]%>
           </td>
           <td>
-            <%= order.quantity %>
+            <%= order.quantity %> (<%= order.products.first["unit"] %>)
           </td>
           <td>
-            <%= order.user_id %>
+            <%= order.user.name %>
           </td>
         </tr>
     <% end %>

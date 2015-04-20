@@ -7,5 +7,5 @@ class Order
   timestamps!
 
   belongs_to :user
-  many :products
+  many :product
 end
