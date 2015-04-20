@@ -1,0 +1,11 @@
+<h1>
+  Create New User
+</h1>
+
+<%= form_for @user, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+  <%= label_tag :user_id, "User ID" %>
+  <%= f.text_field :user_id %>
+  <%= label_tag :name, "Name" %>
+  <%= f.text_field :name %>
+  <%  f.submit "Create" %>
+<% end %>

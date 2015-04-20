@@ -1,0 +1,19 @@
+<h1>
+  Current Users
+</h1>
+
+  <% if !@users.empty? %>
+    <table>
+      <% @users.each do |user| %>
+        <tr>
+          <td> <%= user.user_id </td>
+          <td> <%= user.name </td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p>
+      No User found. Please add some users.
+      Thank you!
+    </p>
+<% end %>
