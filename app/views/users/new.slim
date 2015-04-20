@@ -1,0 +1,9 @@
+h1
+  Create New User
+
+= form_for @user, url: {action: "create"}, html: {class: "nifty_form"} do |f|
+  |User ID:
+  = f.text_field :user_id
+  |Name:
+  = f.text_field :name
+  = f.submit "Create"

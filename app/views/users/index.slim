@@ -1,0 +1,13 @@
+h1
+  | Current Users
+
+  - if !@users.empty?
+    table#users
+      - @users.each do |user|
+        tr
+          td.user_id = user.user_id
+          td.name = user.name
+      end
+  - else
+    p No User found. Please add some users.
+      Thank you!
