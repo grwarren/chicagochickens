@@ -34,6 +34,10 @@ html(lang='en')
 
       .row.marketing
         .col-lg-12
+          .alert.alert-success
+            - flash.each do | key, msg |
+              = msg
+
           == yield
 
       footer.footer

@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     if @order.save
-      redirect_to new_order_path, message: 'Your order has been recieved'
+      redirect_to new_order_path, notice: 'Your order has been recieved'
     else
       render new_order_path
     end
