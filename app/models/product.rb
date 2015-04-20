@@ -1,7 +1,9 @@
 class Product
-  include MongoMapper::Document
+  include Mongoid::Document
+  include Mongoid::Timestamps
 
-  key :name, String
-  key :unit, String
-  timestamps!
+  field :name, type: String
+  field :unit, type: String
+
+  belongs_to :order
 end

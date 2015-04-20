@@ -1,11 +1,12 @@
 class Order
-  include MongoMapper::Document
 
-  key :quantity, Integer
-  key :delivery_date, Date
-  key :delivered, Boolean
-  timestamps!
+  include Mongoid::Document
+  include Mongoid::Timestamps
 
+  field :quantity, type: Integer
+  field :delivery_date, type:  Date
+  field :delivered, type: Boolean
+  
   belongs_to :user
-  many :product
+  has_many :products
 end

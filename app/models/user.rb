@@ -1,10 +1,9 @@
 class User
-  include MongoMapper::Document
+  include Mongoid::Document
+  include Mongoid::Timestamps
 
-  key :user_id, Integer
-  key :name, String
-  timestamps!
-
-
-  many :orders
+  field :user_id, type: Integer
+  field :name, type: String
+  
+  has_many :orders
 end

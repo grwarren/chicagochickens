@@ -30,5 +30,4 @@ describe OrdersController, :type => :controller do
       expect(response).to redirect_to user_orders_path
     end
   end
-
 end

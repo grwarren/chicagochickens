@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   def set_current_user
     user_id = session[:user_id].nil? ? params[:user_id] : session[:user_id]
-    @current_user ||= User.find_by_user_id(user_id.to_i) rescue nil
+    @current_user ||= User.find_by(user_id: user_id.to_i) rescue nil
   end
 end
