@@ -20,12 +20,13 @@ describe OrdersController, :type => :controller do
 
   describe 'POST /create' do
     let(:order) { build :order }
+    let(:user) { create :user }
 
     it 'should show new order page' do
-      post :create,  order: order.attributes
+      post :create,  order: order.attributes,  user_id: user.user_id
 
       expect(flash[:notice]).to eql("Your order has been recieved")
-      expect(response).to redirect_to new_order_path
+      expect(response).to redirect_to user_orders_path
     end
   end
 

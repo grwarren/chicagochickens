@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :set_current_user
+
   def new
     @order = Order.new
     @next_delivery_date = 1.week.from_now.strftime("%m-%d-%Y")
@@ -10,16 +12,16 @@ class OrdersController < ApplicationController
    end
 
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(order_params.merge(user_id: @current_user.user_id ))
     if @order.save
-      redirect_to new_order_path, notice: 'Your order has been recieved'
+      redirect_to user_orders_path(user_id: @current_user.user_id) , notice: 'Your order has been recieved'
     else
-      render new_order_path
+      render redirect_to user_orders_path(user_id: @current_user.user_id)
     end
   end
 
 private
   def order_params
-    params.require(:order).permit(:quantity)
+    params.require(:order).permit(:quantity, :product, :delivery_date, :user_id)
   end
 end

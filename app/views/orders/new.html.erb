@@ -4,21 +4,20 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <%=  form_for @order,  html: {class: "form-horizontal"} do |f| %>
-      <% @products.each do | product | %>
-        <div class="form-group form-inline">
-          <%= label_tag :quantity, "#{product.name }  #{units(product)}" , class: "col-sm-4 control-label" %>
-          <div class="col-sm-8">
-              <%=  f.text_field :quantity, class: "form-control", placeholder: "" %>
-          </div>
+    <% @products.each do | product | %>
+    <%= form_for @order, url: user_orders_path(user_id: @current_user.user_id) do | f | %>
+      <div class="row">
+        <div class="col-md-4"><%= product.name %></div>
+        <div class="col-md-4">
+          <input type="hidden" name="order[product]" value="<%= product.id %>" %>
+          <%=  f.select :quantity, options_for_select(quantity_options_for(product))%>
         </div>
-      <% end %>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <%= f.text_field :delivery_date, :html => {:class =>"moon_form"}, class: "form-control", type: :hidden %>
-        <%=  f.submit "Order", class: "btn btn-primary" %>
+        <div class="col-md-4">
+          <%=  submit_tag "Order", :class => "btn btn-primary" %>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+    <hr/>
+    <% end %>
   </div>
 </div>

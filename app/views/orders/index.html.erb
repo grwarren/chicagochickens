@@ -5,7 +5,13 @@
     <% @orders.each do |order| %>
         <tr>
           <td>
+            <%= order.product %>
+          </td>
+          <td>
             <%= order.quantity %>
+          </td>
+          <td>
+            <%= order.user_id %>
           </td>
         </tr>
     <% end %>
