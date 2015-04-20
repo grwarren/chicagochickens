@@ -1,7 +1,5 @@
-h1
-  This is the new order page
-
-= form_for @order, url: {action: "create"}, html: {class: "nifty_form"} do |f|
-  = f.text_field :quantity
-  = f.text_field :delivery_date
-  = f.submit "Create"
+= form_for @order, url: {action: "create"}, html: {class: "form-inline"} do |f|
+  .form-group
+    = f.label :quantity, 'Chicken Eggs (in Dozens)'
+    = f.text_field :quantity
+  = f.submit "Order"
