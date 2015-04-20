@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    user_id 10
+    sequence(:user_id) { |n| "10#{n}".to_i }
     name 'Marques Marcello'
   end
 end
