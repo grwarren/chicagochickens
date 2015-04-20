@@ -1,0 +1,13 @@
+h1
+  | Current Orders
+
+  - if !@orders.empty?
+    table#items
+    - @orders.each do |order|
+      tr
+        -#td.name = item.name
+        -#td.price = item.price
+    end
+  - else
+    p No Orders found. Please add some orders.
+      Thank you!

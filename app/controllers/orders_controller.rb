@@ -3,4 +3,8 @@ class OrdersController < ApplicationController
     @order = Order.new
     @products = Product.all
   end
+
+   def index
+     @orders = Order.all
+   end
 end
