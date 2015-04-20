@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   def new
     @order = Order.new
+    @next_delivery_date = 1.week.from_now.strftime("%m-%d-%Y")
     @products = Product.all
   end
 

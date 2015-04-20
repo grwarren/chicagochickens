@@ -1,0 +1,19 @@
+<h1> Current Orders </h1>
+
+<% if !@orders.empty? %>
+  <table>
+    <% @orders.each do |order| %>
+        <tr>
+          <td>
+            <%= order.quantity %>
+          </td>
+        </tr>
+    <% end %>
+</table>
+
+  <% else %>
+    <p>
+      No Orders found. Please add some orders.
+      Thank you!
+    </p>
+<% end %>
