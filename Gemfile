@@ -29,7 +29,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 gem 'mongoid', '~> 4.0.2'
 gem 'bson_ext'
-gem 'slim'
 gem 'bootstrap-sass', '~> 3.3.4.1'
 
 group :development, :test do

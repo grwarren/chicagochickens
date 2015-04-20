@@ -1,0 +1,18 @@
+<h1>
+  Current Products
+</h1>
+
+  <% if !@products.empty? %>
+    <table>
+      <% @products.each do |product| %>
+        <tr>
+          <td> <%= product.name  %></td>
+          <td> <%= product.unit %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p>
+      No products found.
+    </p>
+<% end %>

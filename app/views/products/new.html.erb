@@ -1,0 +1,11 @@
+<h1>
+  Create New Product
+</h1>
+
+<%= form_for @product, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+  <%= label_tag :name, "Name" %>
+  <%= f.text_field :name %>
+  <%= label_tag :unit, "Unit" %>
+  <%= f.text_field :unit %>
+  <%=  f.submit "Create" %>
+<% end %>
