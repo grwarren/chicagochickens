@@ -46,6 +46,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-expectations'
   gem "database_cleaner", '1.0.0.RC1'
+  gem 'factory_girl_rails'
 end
 
 source 'https://rails-assets.org' do
