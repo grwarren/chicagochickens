@@ -13,8 +13,8 @@ class OrdersController < ApplicationController
 
   def create
     product = Product.find_by(id: params[:order][:product])
-    @order = Order.new(order_params.merge(user: @current_user, products: [product]))
-    
+    @order = Order.new(order_params.merge(user: @current_user, product: product))
+
     if @order.save
       redirect_to user_orders_path(user_id: @current_user.user_id) , notice: 'Your order has been recieved'
     else

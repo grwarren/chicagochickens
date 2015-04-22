@@ -6,7 +6,7 @@ class Order
   field :quantity, type: Integer
   field :delivery_date, type:  Date
   field :delivered, type: Boolean
-  
+
   belongs_to :user
-  has_many :products
+  has_one :product
 end
