@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
   before_action :set_current_user
-  before_action :set_products, only: [:new, :create]
+  before_action :set_products, :set_delivery_date, only: [:new, :create]
 
   def new
     @order = Order.new
-    @next_delivery_date = 1.week.from_now.strftime("%m-%d-%Y")
+
   end
 
    def index
@@ -35,5 +35,9 @@ private
 
   def set_products
     @products = Product.all
+  end
+
+  def set_delivery_date
+    @next_delivery_date = 1.week.from_now.strftime("%m-%d-%Y")
   end
 end

@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 describe OrdersController, :type => :controller do
+  let(:expected_delivery_date) { 1.week.from_now.strftime("%m-%d-%Y") }
 
   describe 'GET /new' do
-    before(:each) do
-      @products = create_list :product, 2
-    end
+    let(:products) { create_list :product, 2 }
 
     it 'shows new order page with new order and products' do
       get :new
@@ -14,7 +13,8 @@ describe OrdersController, :type => :controller do
       expect(response).to render_template(:new)
 
       expect(assigns :order).to be_a(Order)
-      expect(assigns :products).to match_array(@products)
+      expect(assigns :next_delivery_date).to eql(expected_delivery_date)
+      expect(assigns :products).to match_array(products)
     end
   end
 
@@ -53,6 +53,7 @@ describe OrdersController, :type => :controller do
         expect(response).to render_template(:new)
         expect(assigns :order).to_not be_valid
         expect(assigns :products).to contain_exactly(product)
+        expect(assigns :next_delivery_date).to eql(expected_delivery_date)
         expect(assigns(:order).errors.full_messages).to match_array(expected_errors)
       end
     end
