@@ -5,8 +5,11 @@ describe UsersController, type: :controller do
   describe "POST #create" do
     let(:user) { build :user }
 
-    it "redirects to all users path" do
+    it 'persists a new user' do
       expect { post :create, user: user.attributes }.to change(User, :count).by(1)
+    end
+
+    it "redirects to all users path" do
       post :create, user: user.attributes
 
       expect(flash[:notice]).to eql('New User Created')

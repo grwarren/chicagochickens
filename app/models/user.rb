@@ -8,6 +8,7 @@ class User
   has_many :orders
 
   validates_presence_of :name, :user_id
+  validates_uniqueness_of :user_id
 
   def to_param
     user_id.to_s
