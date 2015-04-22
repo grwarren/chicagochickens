@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
       @order.product = product
 
       if @order.save
-        redirect_to user_orders_path(user_id: @current_user.user_id) , notice: 'Your order has been recieved'
+        redirect_to user_orders_path(@current_user) , notice: 'Your order has been recieved'
       else
         render :new
       end

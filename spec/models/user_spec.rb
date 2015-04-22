@@ -16,7 +16,7 @@ describe User do
     it 'returns user_id instead of mongo\'s Object._id' do
       user = create :user
 
-      expect(user.to_param).to eql(user.user_id)
+      expect(user.to_param).to eql("#{user.user_id}")
     end
   end
 end

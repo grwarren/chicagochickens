@@ -10,6 +10,6 @@ class User
   validates_presence_of :name, :user_id
 
   def to_param
-    user_id
+    user_id.to_s
   end
 end
