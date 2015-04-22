@@ -10,4 +10,13 @@ describe User do
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:user_id) }
+
+
+  describe 'to_param' do
+    it 'returns user_id instead of mongo\'s Object._id' do
+      user = create :user
+
+      expect(user.to_param).to eql(user.user_id)
+    end
+  end
 end

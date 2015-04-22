@@ -8,4 +8,8 @@ class User
   has_many :orders
 
   validates_presence_of :name, :user_id
+
+  def to_param
+    user_id
+  end
 end
