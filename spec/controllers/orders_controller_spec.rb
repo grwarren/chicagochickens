@@ -21,19 +21,21 @@ describe OrdersController, :type => :controller do
   describe 'POST /create' do
     let(:user) { create :user }
     let(:product) { create :product }
+    let(:valid_params) { { order: { quantity: 10, product: product.id } , user_id: user.user_id } }
+
     describe 'valid params' do
       it 'saves new order' do
-        expect {  post :create,  order: { quantity: 10, product: product.id } , user_id: user.user_id }.to change(Order, :count).by(1)
+        expect {  post :create,  valid_params }.to change(Order, :count).by(1)
       end
 
       it 'saves order with ordered product' do
-        post :create,  order: { quantity: 10, product: product.id } , user_id: user.user_id
+        post :create,  valid_params
 
         expect(assigns(:order).reload.product).to eql product
       end
 
       it 'redirects to new order page after save' do
-        post :create,  order: { quantity: 10, product: product.id } , user_id: user.user_id
+        post :create,  valid_params
 
         expect(flash[:notice]).to eql("Your order has been recieved")
         expect(response).to redirect_to user_orders_path(user_id: user.user_id)
@@ -41,9 +43,12 @@ describe OrdersController, :type => :controller do
     end
 
     describe 'invalid params' do
+      let(:invalid_params) { { order: { quantity: 10, product: '' }, user_id: user.user_id } }
+
       it 'renders new with errors' do
-        post :create,  order: { quantity: 10, product: '' } , user_id: user.user_id
         expected_errors = ["Product can't be blank"]
+
+        post :create,  invalid_params
 
         expect(response).to render_template(:new)
         expect(assigns :order).to_not be_valid
