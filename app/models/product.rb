@@ -6,4 +6,6 @@ class Product
   field :unit, type: String
 
   belongs_to :order
+
+  validates_presence_of :name
 end
