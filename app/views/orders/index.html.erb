@@ -16,10 +16,10 @@
     <% @orders.each do |order| %>
         <tr>
           <td>
-            <%= order.products.first["name"]%>
+            <%= order.product.name %>
           </td>
           <td>
-            <%= order.quantity %> (<%= order.products.first["unit"] %>)
+            <%= order.quantity %> (<%= order.product.unit %>)
           </td>
           <td>
             <%= order.user.name %>
