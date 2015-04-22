@@ -10,7 +10,7 @@
         <div class="col-md-4"><%= product.name %></div>
         <div class="col-md-4">
           <input type="hidden" name="order[product]" value="<%= product.id %>" %>
-          <%=  f.select :quantity, options_for_select(quantity_options_for(product))%>
+          <%=  f.select :quantity, options_for_select(quantity_options_for(product)), {}, class: 'form-control' %>
         </div>
         <div class="col-md-4">
           <%=  submit_tag "Order", :class => "btn btn-primary" %>
