@@ -1,18 +1,30 @@
-<h1>
-  Current Products
-</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Current Products</h3>
+</div>
+  <div class="panel-body">
 
-  <% if !@products.empty? %>
-    <table>
-      <% @products.each do |product| %>
-        <tr>
-          <td> <%= product.name  %></td>
-          <td> <%= product.unit %></td>
-        </tr>
-      <% end %>
-    </table>
-  <% else %>
-    <p>
-      No products found.
-    </p>
-<% end %>
+    <% if !@products.empty? %>
+        <table class="table table-bordered">
+          <tr>
+            <td>
+              Product Name
+            </td>
+            <td>
+              Unit
+            </td>
+          </tr>
+          <% @products.each do |product| %>
+            <tr>
+              <td> <%= product.name  %></td>
+              <td> <%= product.unit %></td>
+            </tr>
+          <% end %>
+        </table>
+      <% else %>
+        <p>
+          No products found.
+        </p>
+    <% end %>
+  </div>
+</div>

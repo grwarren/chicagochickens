@@ -1,36 +1,41 @@
-<h1> Current Orders </h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Current Orders</h3>
+  </div>
+  <div class="panel-body">
+  <% if !@orders.empty? %>
+    <table class="table table-bordered">
+      <tr>
+        <td>
+          Product
+        </td>
+        <td>
+          Quantity
+        </td>
+        <td>
+          User
+        </td>
+      </tr>
+      <% @orders.each do |order| %>
+          <tr>
+            <td>
+              <%= order.product.name %>
+            </td>
+            <td>
+              <%= order.quantity %> (<%= order.product.unit %>)
+            </td>
+            <td>
+              <%= order.user.name %>
+            </td>
+          </tr>
+      <% end %>
+  </table>
 
-<% if !@orders.empty? %>
-  <table class="table">
-    <tr>
-      <td>
-        Product
-      </td>
-      <td>
-        Quantity
-      </td>
-      <td>
-        User
-      </td>
-    </tr>
-    <% @orders.each do |order| %>
-        <tr>
-          <td>
-            <%= order.product.name %>
-          </td>
-          <td>
-            <%= order.quantity %> (<%= order.product.unit %>)
-          </td>
-          <td>
-            <%= order.user.name %>
-          </td>
-        </tr>
-    <% end %>
-</table>
-
-  <% else %>
-    <p>
-      No Orders found. Please add some orders.
-      Thank you!
-    </p>
-<% end %>
+    <% else %>
+      <p>
+        No Orders found. Please add some orders.
+        Thank you!
+      </p>
+  <% end %>
+</div>
+</div>
