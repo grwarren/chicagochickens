@@ -6,8 +6,10 @@ describe UsersController, type: :controller do
     let(:user) { build :user }
 
     it "redirects to all users path" do
+      expect { post :create, user: user.attributes }.to change(User, :count).by(1)
       post :create, user: user.attributes
 
+      expect(flash[:notice]).to eql('New User Created')
       expect(response).to redirect_to new_user_path
     end
   end
@@ -21,15 +23,13 @@ describe UsersController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    before(:each) do
-      @users = create_list :user, 2
-    end
+  describe "GET #users" do
+    let(:users)  { create_list :user, 2 }
 
     it "returns http success" do
       get :index
 
-      expect(assigns :users).to match_array(@users)
+      expect(assigns :users).to match_array(users)
       expect(response).to have_http_status(:success)
     end
   end
