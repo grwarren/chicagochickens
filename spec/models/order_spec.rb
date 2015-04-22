@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Order, type: :model do
+describe Order do
 
   it 'has valid factories' do
     expect(build :order).to be_valid
