@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Order, type: :model do
 
-  it 'has valid factory' do
+  it 'has valid factories' do
     expect(build :order).to be_valid
     expect(build :order_with_product).to be_valid
   end
