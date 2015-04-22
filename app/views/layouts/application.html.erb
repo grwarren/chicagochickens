@@ -27,7 +27,9 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation" class="active">
+              <%= link_to "Home", build_user_path(@current_user) %>
+              </li>
             <li role="presentation"><a href="#">Contact</a></li>
           </ul>
         </nav>

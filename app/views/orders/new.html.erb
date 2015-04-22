@@ -5,7 +5,7 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <% @products.each do | product | %>
-    <%= form_for @order, url: user_orders_path(user_id: @current_user.user_id) do | f | %>
+    <%= form_for @order, url: build_user_path(@current_user) do | f | %>
       <div class="row">
         <div class="col-md-4"><%= product.name %></div>
         <div class="col-md-4">
