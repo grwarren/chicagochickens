@@ -45,7 +45,7 @@ describe OrdersController, :type => :controller do
     describe 'invalid params' do
       let(:invalid_params) { { order: { quantity: 10, product: '' }, user_id: user.user_id } }
 
-      it 'renders new with errors' do
+      it 'renders new with errors when product is missing' do
         expected_errors = ["Product can't be blank"]
 
         post :create,  invalid_params
