@@ -44,6 +44,7 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'rspec-expectations'
+  gem 'mongoid-rspec', '~> 2.1.0'
   gem "database_cleaner", '1.0.0.RC1'
   gem 'factory_girl_rails'
 end

@@ -4,8 +4,14 @@ describe Order, type: :model do
 
   it 'has valid factories' do
     expect(build :order).to be_valid
-    expect(build :order_with_product).to be_valid
   end
+
+  it { is_expected.to have_one(:product).of_type(Product) }
+  it { is_expected.to belong_to(:user).of_type(User) }
+
+  it { is_expected.to validate_presence_of(:user) }
+  it { is_expected.to validate_presence_of(:product) }
+  it { is_expected.to validate_presence_of(:quantity) }
 
   describe 'save' do
     let(:order) { build :order }

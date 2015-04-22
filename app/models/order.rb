@@ -9,4 +9,6 @@ class Order
 
   belongs_to :user
   has_one :product
+
+  validates_presence_of :product, :user, :quantity
 end
