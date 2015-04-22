@@ -56,6 +56,17 @@ describe OrdersController, :type => :controller do
         expect(assigns :next_delivery_date).to eql(expected_delivery_date)
         expect(assigns(:order).errors.full_messages).to match_array(expected_errors)
       end
+
+      it 'renders new with errors when user is missing' do
+        expected_errors = ["User can't be blank"]
+        post :create,  order: { quantity: 10, product: product.id }
+
+        expect(response).to render_template(:new)
+        expect(assigns :order).to_not be_valid
+        expect(assigns :products).to contain_exactly(product)
+        expect(assigns :next_delivery_date).to eql(expected_delivery_date)
+        expect(assigns(:order).errors.full_messages).to match_array(expected_errors)
+      end
     end
   end
 end
