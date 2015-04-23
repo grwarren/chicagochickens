@@ -8,12 +8,11 @@ module Requests
     validate :params_completeness?
 
     def save
-      @order = Order.new(quantity: params[:quantity], user: params[:user], product: product)
-      valid? && @order.save
+      valid? && order.save
     end
 
     def order
-      @order
+      Order.new(quantity: params[:quantity], user: params[:user], product: product)
     end
 
   private
