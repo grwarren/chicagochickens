@@ -16,7 +16,7 @@ module Requests
       @order
     end
 
-private
+  private
     def product
       Product.find_by(id: params[:product]) rescue nil
     end
