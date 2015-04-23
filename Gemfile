@@ -30,7 +30,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'mongoid', '~> 4.0.2'
 gem 'bson_ext'
 gem 'bootstrap-sass', '~> 3.3.4.1'
-
+gem 'active_attr', '~> 0.8.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

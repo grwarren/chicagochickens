@@ -29,9 +29,9 @@ describe OrdersController, :type => :controller do
       end
 
       it 'saves order with ordered product' do
-        post :create,  valid_params
+        expect_any_instance_of(Requests::OrderRequest).to receive(:save).and_return(true)
 
-        expect(assigns(:order).reload.product).to eql product
+        post :create,  valid_params
       end
 
       it 'redirects to new order page after save' do

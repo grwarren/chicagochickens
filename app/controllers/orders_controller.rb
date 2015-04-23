@@ -11,26 +11,19 @@ class OrdersController < ApplicationController
      @orders = Order.all
    end
 
-  def create
-    @order = Order.new(order_params.merge(user: @current_user))
-    product_id = params[:order][:product]
-    unless product_id.empty?
-      product = Product.find_by(id: product_id)
-      @order.product = product
-
-      if @order.save
-        redirect_to user_orders_path(@current_user) , notice: 'Your order has been recieved'
-      else
-        render :new
-      end
-    else
-      render :new
-    end
-  end
+   def create
+     order_request = Requests::OrderRequest.new(params: order_params.merge(user: @current_user))
+     if order_request.save
+       redirect_to user_orders_path(@current_user) , notice: 'Your order has been recieved'
+     else
+       @order = order_request.order
+       render :new
+     end
+   end
 
 private
   def order_params
-    params.require(:order).permit(:quantity, :delivery_date)
+    params.require(:order).permit(:quantity, :delivery_date, :product)
   end
 
   def set_products
