@@ -13,7 +13,7 @@ describe OrdersHelper do
     end
 
     it 'does not pluralizes multiple product counts' do
-      expect(helper.pluralize_units(TWO, product)).to eq "#{TWO} Dozens"
+      expect(helper.pluralize_units(TWO, product)).to eq "#{TWO} Dozen"
     end
 
     it 'adds product name when product has no unit' do
