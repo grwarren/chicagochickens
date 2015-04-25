@@ -22,7 +22,7 @@
               <%= order.product.name %>
             </td>
             <td>
-              <%= order.quantity %> (<%= order.product.unit %>)
+              <%= prularize_units(order.quantity, order.product) %>
             </td>
             <td>
               <%= order.user.name %>
