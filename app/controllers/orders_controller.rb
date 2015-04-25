@@ -11,7 +11,8 @@ class OrdersController < ApplicationController
    end
 
    def create
-     order_request = Requests::OrderRequest.new(params: order_params.merge(user: @current_user, delivery: @next_delivery_date))
+     params = order_params.merge(user: @current_user, delivery: @next_delivery_date)
+     order_request = Requests::OrderRequest.new(params: params)
      if order_request.save
        redirect_to user_orders_path(@current_user) , notice: 'Your order has been recieved'
      else
