@@ -16,6 +16,7 @@ module Responses
      end
     end
 
+  private
     def products
       Product.nin(id: user.orders.map(&:product))
     end
