@@ -3,10 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_products, :set_delivery_date, only: [:new, :create]
 
   def new
-    @orders = []
-    @products.each do |product|
-      @orders << Order.new(user: @current_user, product: product, quantity: 0, delivery_date: @delivery_date)
-    end
+    @orders = Responses::OrderResponse.new(user: @current_user).orders
   end
 
    def index
@@ -33,6 +30,6 @@ private
   end
 
   def set_delivery_date
-    @next_delivery_date = 1.week.from_now.strftime("%m-%d-%Y")
+    @next_delivery_date = 1.week.from_now
   end
 end

@@ -4,6 +4,6 @@ module OrdersHelper
   end
 
   def quantity_options_for(product)
-    (1..10).to_a.collect { | n | [" #{prularize_units(n, product) }", n ] }
+    (0..10).to_a.collect { | n | [" #{prularize_units(n, product) }", n ] }
   end
 end

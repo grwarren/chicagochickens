@@ -13,4 +13,8 @@ class User
   def to_param
     user_id.to_s
   end
+
+  def has_orders_for? delivery_date
+    !orders.where(delivery_date: delivery_date).empty?
+  end
 end

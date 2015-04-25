@@ -1,5 +1,5 @@
 <div class="alert alert-info" role="alert">
-  <h4> Your order will be delivered on:  <%= @next_delivery_date %></h4>
+  <h4> Your order will be delivered on:  <%= @next_delivery_date.strftime("%m-%d-%Y") %></h4>
 </div>
 
 <div class="panel panel-default">
@@ -10,7 +10,7 @@
         <div class="col-md-4"><%= order.product.name %></div>
         <div class="col-md-4">
           <input type="hidden" name="order[product]" value="<%= order.product.id %>" %>
-          <%=  f.select :quantity, options_for_select(quantity_options_for(order.product)), {}, class: 'form-control' %>
+          <%=  f.select :quantity, options_for_select(quantity_options_for(order.product),  order.quantity), {}, class: 'form-control' %>
         </div>
         <div class="col-md-4">
           <%=  submit_tag "Order", :class => "btn btn-primary" %>
