@@ -3,12 +3,16 @@ module Responses
     include ActiveAttr::Model
 
     attribute :user
+    validates_presence_of :user
 
     def orders
-       users_orders = user.orders.where(delivery_date: delivery_date)
+      if valid?
+         users_orders = user.orders.where(delivery_date: delivery_date)
 
-       new_orders = products.collect { | product | Order.new(user: user, product: product, quantity: 0, delivery_date: delivery_date) }
-       users_orders + new_orders
+         new_orders = products.collect { | product | Order.new(user: user, product: product, quantity: 0, delivery_date: delivery_date) }
+         users_orders + new_orders
+       end
+       []
     end
 
     def products
