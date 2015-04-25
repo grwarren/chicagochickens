@@ -3,8 +3,10 @@ class OrdersController < ApplicationController
   before_action :set_products, :set_delivery_date, only: [:new, :create]
 
   def new
-    @order = Order.new
-
+    @orders = []
+    @products.each do |product|
+      @orders << Order.new(user: @current_user, product: product, quantity: 0, delivery_date: @delivery_date)
+    end
   end
 
    def index

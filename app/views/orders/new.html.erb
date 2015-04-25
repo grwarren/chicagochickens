@@ -4,13 +4,13 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <% @products.each do | product | %>
-    <%= form_for @order, url: build_user_path(@current_user) do | f | %>
+    <% @orders.each do | order | %>
+    <%= form_for order, url: build_user_path(@current_user) do | f | %>
       <div class="row">
-        <div class="col-md-4"><%= product.name %></div>
+        <div class="col-md-4"><%= order.product.name %></div>
         <div class="col-md-4">
-          <input type="hidden" name="order[product]" value="<%= product.id %>" %>
-          <%=  f.select :quantity, options_for_select(quantity_options_for(product)), {}, class: 'form-control' %>
+          <input type="hidden" name="order[product]" value="<%= order.product.id %>" %>
+          <%=  f.select :quantity, options_for_select(quantity_options_for(order.product)), {}, class: 'form-control' %>
         </div>
         <div class="col-md-4">
           <%=  submit_tag "Order", :class => "btn btn-primary" %>
