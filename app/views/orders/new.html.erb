@@ -1,23 +1,32 @@
-<div class="alert alert-info" role="alert">
-  <h4> Your order will be delivered on:  <%= @next_delivery_date.strftime("%m-%d-%Y") %></h4>
-</div>
+<% if !@orders.empty? %>
+  <div class="alert alert-info" role="alert">
+      <h4> Your order will be delivered on:  <%= @next_delivery_date.strftime("%m-%d-%Y") %></h4>
+  </div>
+  <% end %>
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <% @orders.each do | order | %>
-    <%= form_for order, url: build_user_path(@current_user) do | f | %>
-      <div class="row">
-        <div class="col-md-4"><%= order.product.name %></div>
-        <div class="col-md-4">
-          <input type="hidden" name="order[product]" value="<%= order.product.id %>" %>
-          <%=  f.select :quantity, options_for_select(quantity_options_for(order.product),  order.quantity), {}, class: 'form-control' %>
-        </div>
-        <div class="col-md-4">
-          <%=  submit_tag "Order", :class => "btn btn-primary" %>
-        </div>
+    <% if @orders.empty? %>
+      <div class="alert alert-warning" role="alert">
+          <strong>Hi there :-)</strong>
+          <p> Is it your first time here, I don't think I know you. Please be sure to have your user id in the url. Thanks.</p>
       </div>
-    <% end %>
-    <hr/>
-    <% end %>
+      <% else %>
+        <% @orders.each do | order | %>
+        <%= form_for order, url: build_user_path(@current_user) do | f | %>
+          <div class="row">
+            <div class="col-md-4"><%= order.product.name %></div>
+            <div class="col-md-4">
+              <input type="hidden" name="order[product]" value="<%= order.product.id %>" %>
+              <%=  f.select :quantity, options_for_select(quantity_options_for(order.product),  order.quantity), {}, class: 'form-control' %>
+            </div>
+            <div class="col-md-4">
+              <%=  submit_tag "Order", :class => "btn btn-primary" %>
+            </div>
+          </div>
+        <% end %>
+        <hr/>
+        <% end %>
+      <% end %>
   </div>
 </div>
