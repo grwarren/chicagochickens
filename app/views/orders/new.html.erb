@@ -1,10 +1,7 @@
-<% if !@orders.empty? %>
-  <div class="alert alert-info" role="alert">
-      <h4> Your order will be delivered on:  <%= @next_delivery_date.strftime("%m-%d-%Y") %></h4>
-  </div>
-  <% end %>
-
 <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Current Orders for <%=@current_user.name %></h3>
+  </div>
   <div class="panel-body">
     <% if @orders.empty? %>
       <div class="alert alert-warning" role="alert">
@@ -12,6 +9,10 @@
           <p> Is it your first time here, I don't think I know you. Please be sure to have your user id in the url. Thanks.</p>
       </div>
       <% else %>
+        <div class="row">
+            <div class="col-md-4"><h4>Delivery Date</h4></div>
+            <div class="col-md-4"> <h4><%= @next_delivery_date.strftime("%m-%d-%Y")  %></h4></div>
+          </div>
         <% @orders.each do | order | %>
         <%= form_for order, url: build_user_path(@current_user) do | f | %>
           <div class="row">
