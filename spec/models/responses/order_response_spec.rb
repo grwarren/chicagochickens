@@ -3,6 +3,7 @@ include Responses
 
 describe  Responses::OrderResponse do
   let(:user) { create :user}
+
   let(:order_response) { Responses::OrderResponse.new(user: user)}
 
   describe '#orders' do
@@ -11,9 +12,17 @@ describe  Responses::OrderResponse do
     end
 
     it 'created for each product if user has not made any orders' do
-      create :product
-      p order_response.valid?
-      expect(order_response.orders.size).to eq 1
+      create_list :product, 2
+      expect(order_response.orders.size).to eq 2
+    end
+
+    it 'merges existing orders and new orders for the user' do
+      products = create_list :product, 2
+      dove_eggs = create(:product, name: "Dove Eggs", unit: "Eggs")
+      order = create(:order, user: user, product: dove_eggs)
+
+      expect(order_response.orders.size).to eq 3
+      expect(order_response.orders.map(&:product)).to include(dove_eggs)
     end
   end
 end
