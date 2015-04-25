@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Current Orders for <%=@current_user.name %></h3>
+    <h3 class="panel-title"><%= user_orders_headers(@current_user) %></h3>
   </div>
   <div class="panel-body">
     <% if @orders.empty? %>
