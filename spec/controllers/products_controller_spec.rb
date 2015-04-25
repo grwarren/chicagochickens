@@ -8,7 +8,7 @@ RSpec.describe ProductsController, type: :controller do
     it "redirects to all product path" do
       post :create, product: product.attributes
 
-      expect(response).to redirect_to new_product_path
+      expect(response).to redirect_to products_url
     end
   end
 

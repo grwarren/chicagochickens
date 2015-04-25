@@ -6,18 +6,17 @@
     <% if !@users.empty? %>
       <table class="table table-bordered">
         <tr>
-          <td>
-            User Id
-          </td>
-          <td>
-            Name
-          </td>
+          <th> User Id</th>
+          <th> Name</th>
         </tr>
 
         <% @users.each do |user| %>
           <tr>
             <td> <%= user.user_id %></td>
             <td> <%= user.name  %></td>
+            <td> <%= link_to 'Edit', edit_user_path(user.user_id)%></td>
+            <td> <%= link_to 'Delete',  "/users/#{user.user_id}", :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+
           </tr>
         <% end %>
       </table>

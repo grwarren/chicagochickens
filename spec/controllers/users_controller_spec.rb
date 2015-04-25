@@ -13,7 +13,7 @@ describe UsersController, type: :controller do
       post :create, user: user.attributes
 
       expect(flash[:notice]).to eql('New User Created')
-      expect(response).to redirect_to new_user_path
+      expect(response).to redirect_to users_path
     end
   end
 
