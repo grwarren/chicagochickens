@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
      params = order_params.merge(user: @current_user, delivery: @next_delivery_date)
      order_request = Requests::OrderRequest.new(params: params)
      if order_request.save
-       redirect_to user_orders_path(@current_user) , notice: 'Your order has been recieved'
+       redirect_to user_orders_path(@current_user) , notice: 'Your order has been saved'
      else
        @order = order_request.order
        render :new
@@ -27,7 +27,7 @@ private
   end
 
   def set_products
-    @products = Product.all
+    @products = Product.all.order_by(:sort_order.asc)
   end
 
   def set_delivery_date

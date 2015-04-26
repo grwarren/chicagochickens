@@ -36,7 +36,7 @@ describe OrdersController, :type => :controller do
       it 'redirects to new order page after save' do
         post :create,  valid_params
 
-        expect(flash[:notice]).to eql("Your order has been recieved")
+        expect(flash[:notice]).to eql("Your order has been saved")
         expect(response).to redirect_to user_orders_path(user)
       end
     end
