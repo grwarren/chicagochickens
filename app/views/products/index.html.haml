@@ -1,0 +1,25 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title Current Products
+  .panel-body
+    - if !@products.empty?
+      %table.table.table-bordered
+        %tr
+          %th Product Name
+          %th Unit
+          %th Sort Order
+        - @products.each do |product|
+          %tr
+            %td
+              = product.name
+            %td
+              = product.unit
+            %td
+              = product.sort_order
+            %td
+              = link_to 'Edit', edit_product_path(product.id)
+            %td
+              = link_to 'Delete',  "/products/#{product.id}", :method => :delete, :data => { :confirm => 'Are you sure?' }
+    - else
+      %p
+        No products found.

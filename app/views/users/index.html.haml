@@ -1,0 +1,22 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title Current Users
+  .panel-body
+    - if !@users.empty?
+      %table.table.table-bordered
+        %tr
+          %th User Id
+          %th Name
+        - @users.each do |user|
+          %tr
+            %td
+              = user.user_id
+            %td
+              = user.name
+            %td
+              = link_to 'Edit', edit_user_path(user.user_id)
+            %td
+              = link_to 'Delete',  "/users/#{user.user_id}", :method => :delete, :data => { :confirm => 'Are you sure?' }
+    - else
+      %p
+        No User found.

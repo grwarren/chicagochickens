@@ -1,0 +1,8 @@
+= form_for @product, html: {class: "nifty_form"} do |f|
+  = label_tag :name, "Name"
+  = f.text_field :name
+  = label_tag :unit, "Unit"
+  = f.text_field :unit
+  = label_tag :sort_order, "Sort Order"
+  = f.text_field :sort_order
+  = f.submit "Save"
