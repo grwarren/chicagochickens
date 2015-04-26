@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all
+    @products = Product.all.order_by(:sort_order.asc)
   end
 
   def edit
@@ -42,6 +42,6 @@ class ProductsController < ApplicationController
     end
 
   def product_params
-    params.require(:product).permit(:name, :unit)
+    params.require(:product).permit(:name, :unit, :sort_order)
   end
 end

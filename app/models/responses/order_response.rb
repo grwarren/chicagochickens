@@ -12,8 +12,8 @@ module Responses
          new_orders = products.collect { | product | Order.new(user: user, product: product, quantity: 0, delivery_date: delivery_date) }
          users_orders + new_orders
        else
-       []
-     end
+         []
+      end
     end
 
   private
