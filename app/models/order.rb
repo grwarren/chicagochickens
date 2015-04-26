@@ -7,7 +7,9 @@ class Order
   field :delivery_date, type:  Date
 
   belongs_to :user
-  has_one :product
+  embeds_one :product
+
+  accepts_nested_attributes_for  :product
 
   validates_presence_of :product, :user, :quantity
 end

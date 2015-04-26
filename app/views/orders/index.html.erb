@@ -6,27 +6,20 @@
   <% if !@orders.empty? %>
     <table class="table table-bordered">
       <tr>
-        <td>
-          Product
-        </td>
-        <td>
-          Quantity
-        </td>
-        <td>
-          User
-        </td>
+        <th> User</th>
+        <th> Product</th>
+        <th> Quantity</th>
       </tr>
       <% @orders.each do |order| %>
           <tr>
-            <td>
-              <%= order.product.name %>
-            </td>
-            <td>
-              <%= pluralize_units(order.quantity, order.product) %>
-            </td>
-            <td>
-              <%= order.user.name %>
-            </td>
+            <td> <%= order.user.name %> </td>
+            <% if order.product.nil?  %>
+              <td> &nbsp;</td>
+              <td> &nbsp;</td>
+            <% else %>
+              <td><%= order.product.name %></td>
+              <td> <%= pluralize_units(order.quantity, order.product) %> </td>
+             <% end %>
           </tr>
       <% end %>
   </table>

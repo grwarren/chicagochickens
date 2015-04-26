@@ -6,7 +6,7 @@ describe Order do
     expect(build :order).to be_valid
   end
 
-  it { is_expected.to have_one(:product).of_type(Product) }
+  it { is_expected.to embed_one(:product).of_type(Product) }
   it { is_expected.to belong_to(:user).of_type(User) }
 
   it { is_expected.to validate_presence_of(:user) }
