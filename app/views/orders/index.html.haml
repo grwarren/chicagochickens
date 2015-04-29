@@ -1,17 +1,15 @@
 .panel.panel-default
   .panel-heading
     %h3.panel-title Current Orders
+    = link_to  'Change Order', new_user_order_path(@current_user.user_id), :class => "btn btn-default"
   .panel-body
     - if !@orders.empty?
       %table.table.table-bordered
         %tr
-          %th User
           %th Product
           %th Quantity
         - @orders.each do |order|
           %tr
-            %td
-              = order.user.name
             - if order.product.nil?
               %td &nbsp;
               %td &nbsp;

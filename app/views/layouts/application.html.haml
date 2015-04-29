@@ -24,8 +24,6 @@
           %ul.nav.nav-pills.pull-right
             %li.active{:role => "presentation"}
               = link_to "Home", build_user_path(@current_user)
-            %li{:role => "presentation"}
-              %a{:href => "#"} Contact
         %h3.text-muted Chicago Chickens
       %div
         - flash.each do |name, msg|
