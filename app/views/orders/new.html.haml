@@ -8,26 +8,26 @@
     - else
       .row
         .col-md-4
-          %h4 Delivery Date
+          -#%h4 Delivery Date
         .col-md-4
-          %h4= @next_delivery_date.strftime("%m-%d-%Y")
+          -#%h4= @next_delivery_date.strftime("%m-%d-%Y")
       = form_for @current_user, url:user_orders_url , html: {class: "nifty_form"} do | f |
-        = f.text_field :user_id
-        = f.text_field :name
+        = f.text_field :user_id, type: "hidden"
+        = f.text_field :name, type: "hidden"
         %hr/
-        = @current_user.orders.count
-        = f.fields_for :orders do |orders_form|
+        = f.fields_for :orders do |o|
           .row
-            .col-md-4
-              = orders_form.text_field :delivery_date
-            .col-md-4
-              = orders_form.fields_for :product do | p|
-                = p.text_field :id
-                = p.text_field :name
-                = p.text_field :unit
-            .col-md-4
-              = orders_form.text_field :quantity
-            -#  -#\#{f.select :quantity, options_for_select(quantity_options_for(order.product),  order.quantity), {}, class: 'form-control'}
+            .col-md-3
+              = o.object.delivery_date
+              = o.hidden_field :delivery_date
+            = o.fields_for :product do | p|
+              .col-md-3
+                = p.hidden_field :id
+                = p.object.name
+                = p.hidden_field :name
+              .col-md-3
+                = o.select :quantity, options_for_select(quantity_options_for(p.object), o.object.quantity)
+                = p.hidden_field :unit
         .col-md-4
           = submit_tag "Order", :class => "btn btn-primary"
       %hr/
