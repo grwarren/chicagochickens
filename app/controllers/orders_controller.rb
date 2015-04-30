@@ -25,7 +25,20 @@ class OrdersController < ApplicationController
      end
    end
 
+    def update
+      puts "order update_params = " + user_params.inspect
+      if @current_user.update(user_params)
+        redirect_to user_orders_url(@current_user), notice: "Your orders were successfully updated."
+      else
+        render action: 'edit'
+      end
+  end
+
 private
+   def user_params
+    params.require(:user).permit!
+   end
+
   def order_params
     params.require(:order).permit(:quantity, :delivery_date, :product)
   end

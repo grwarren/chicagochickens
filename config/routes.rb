@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'orders#new'
   get 'orders' => 'orders#index_all'
   post 'orders' => 'orders#create'
+  patch '/users/:user_id/orders' => 'orders#update'
 
    resources :users do
      resources :orders

@@ -11,7 +11,7 @@
           %h4 Delivery Date
         .col-md-4
           %h4= @next_delivery_date.strftime("%m-%d-%Y")
-      = form_for @current_user do | f |
+      = form_for @current_user, url:user_orders_url , html: {class: "nifty_form"} do | f |
         = f.text_field :user_id
         = f.text_field :name
         %hr/
