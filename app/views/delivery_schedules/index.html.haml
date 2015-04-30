@@ -1,0 +1,15 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title Current Delivery dates
+  .panel-body
+    - if !@delivery_schedules.empty?
+      %table.table.table-bordered
+        %tr
+          %th Delivery Date
+        - @delivery_schedules.each do |d|
+          %tr
+            %td
+              = d.date
+    - else
+      %p
+        No Delivery dates found.
