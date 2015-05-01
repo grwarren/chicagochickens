@@ -1,19 +1,30 @@
 require 'spec_helper'
 require 'action_view/helpers'
 
+ZERO = 0
 ONE = 1
 TWO =  2
 
 describe OrdersHelper do
-  let(:product) { build :product }
+  let(:product) { build :product, unit: "Egg" }
 
   describe '#pluralize_units' do
-    it 'does not pluralize single product counts' do
-      expect(helper.pluralize_units(ONE, product)).to eq "#{ONE} Dozen"
+
+    it 'does pluralize multiple product units' do
+      expect(helper.pluralize_units(TWO, product)).to eq "#{TWO} Eggs"
     end
 
-    it 'does not pluralizes multiple product counts' do
-      expect(helper.pluralize_units(TWO, product)).to eq "#{TWO} Dozen"
+    it 'does not pluralize single product unit' do
+      expect(helper.pluralize_units(ONE, product)).to eq "#{ONE} Egg"
+    end
+
+    it 'does pluralize zero product units' do
+      expect(helper.pluralize_units(ZERO, product)).to eq "#{ZERO } Eggs"
+    end
+
+    it 'does not pluralize multiple special product unit' do
+      product_with_special_unit =  build(:product, unit: 'Dozen')
+      expect(helper.pluralize_units(TWO, product_with_special_unit)).to eq "#{TWO} Dozen"
     end
 
     it 'adds product name when product has no unit' do
