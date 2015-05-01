@@ -4,6 +4,7 @@ include Responses
 describe  Responses::OrderResponse do
   let(:user) { create :user}
   let(:order_response) { Responses::OrderResponse.new(user: user)}
+  before(:each) do create :delivery_schedule end
 
   it { is_expected.to validate_presence_of :user }
 

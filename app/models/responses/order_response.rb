@@ -22,7 +22,7 @@ module Responses
     end
 
     def delivery_date
-      1.week.from_now
+      DeliverySchedule.last.date
     end
   end
 end

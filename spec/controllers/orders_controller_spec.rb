@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe OrdersController, :type => :controller do
   let(:user) { create :user }
+  before(:each) do create :delivery_schedule end
 
   describe 'GET /new' do
     let(:products) { create_list :product, 2 }
@@ -13,7 +14,6 @@ describe OrdersController, :type => :controller do
       expect(response).to render_template(:new)
 
       expect(assigns :orders).to_not be_nil
-      expect(assigns :next_delivery_date).to_not be_nil
       expect(assigns :products).to match_array(products)
     end
   end
@@ -52,7 +52,6 @@ describe OrdersController, :type => :controller do
         expect(response).to render_template(:new)
         expect(assigns :order).to_not be_valid
         expect(assigns :products).to contain_exactly(product)
-        expect(assigns :next_delivery_date).to_not be_nil
         expect(assigns(:order).errors.full_messages).to match_array(expected_errors)
       end
 
@@ -63,7 +62,6 @@ describe OrdersController, :type => :controller do
         expect(response).to render_template(:new)
         expect(assigns :order).to_not be_valid
         expect(assigns :products).to contain_exactly(product)
-        expect(assigns(:next_delivery_date)).to_not be_nil
         expect(assigns(:order).errors.full_messages).to match_array(expected_errors)
       end
     end
