@@ -25,6 +25,7 @@
                 = p.hidden_field :id
                 = p.object.name
                 = p.hidden_field :name
+                = p.hidden_field :sort_order
               .col-md-3
                 = o.select :quantity, options_for_select(quantity_options_for(p.object), o.object.quantity)
                 = p.hidden_field :unit
