@@ -1,4 +1,6 @@
 class DeliverySchedulesController < ApplicationController
+  before_action :set_schedule, only: [:edit, :update, :destroy]
+
   def new
     @delivery_schedule = DeliverySchedule.new
   end
@@ -16,8 +18,31 @@ class DeliverySchedulesController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def destroy
+    if @delivery_schedule.destroy
+      redirect_to delivery_schedules_path, notice: 'Delivery schedule deleted.'
+    else
+      redirect_to delivery_schedules_path, notice: 'Delivery schedule could not be deleted.'
+    end
+  end
+
+  def update
+    if @delivery_schedule.update(delivery_schedule_params)
+      redirect_to delivery_schedules_path, notice: 'Delivery date has been updated.'
+    else
+      render :edit
+    end
+  end
+
   private
     def delivery_schedule_params
       params.require(:delivery_schedule).permit(:date)
+    end
+
+    def set_schedule
+      @delivery_schedule = DeliverySchedule.find_by(id: params[:id])
     end
 end

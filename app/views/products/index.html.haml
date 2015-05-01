@@ -17,9 +17,9 @@
             %td
               = product.sort_order
             %td
-              = link_to 'Edit', edit_product_path(product.id), :class => "btn btn-default"
+              = link_to 'Edit', edit_product_path(product), :class => "btn btn-default"
             %td
-              = link_to 'Delete',  "/products/#{product.id}", :method => :delete, :data => { :confirm => 'Are you sure?' },  :class => "btn btn-default"
+              = link_to 'Delete',  product_path(product), :method => :delete, :data => { :confirm => 'Are you sure?' },  :class => "btn btn-default"
     - else
       %p
         No products found.

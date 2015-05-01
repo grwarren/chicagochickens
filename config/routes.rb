@@ -9,11 +9,12 @@ Rails.application.routes.draw do
   post 'orders' => 'orders#create'
   patch '/users/:user_id/orders' => 'orders#update'
 
-   resources :users do
-     resources :orders
-   end
-  resources :products
   resources :delivery_schedules
+  resources :users do
+    resources :orders
+  end
+  resources :products
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
