@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
   end
 
    def index_all
-     @orders = Order.all
+    @orders = Order.all.order_by(:product.asc)
    end
 
   def index
