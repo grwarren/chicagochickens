@@ -1,5 +1,9 @@
 = form_for @delivery_schedule, :html => {class: 'form-horizontal'} do | f |
-  = f.label :date, "Delivery Date"
-  = f.text_field :date, class: "form-control"
+  .form-group
+    = f.label :date, "Delivery Date", { class: "col-sm-3 control-label"}
+    .col-sm-8
+      = f.text_field :date, class: "form-control"
   %br
-  = f.submit "Save", :class => "btn btn-primary"
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit "Save", { class: "btn btn-md btn-default"}

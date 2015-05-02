@@ -5,21 +5,22 @@
     - if !@products.empty?
       %table.table.table-bordered
         %tr
-          %th.col-md-8 Product Name
+          %th.col-md-7 Product Name
           %th.col-md-1 Unit
-          %th.col-md-2 Sort Order
+          %th.col-md-1 Sort Order
+          %th.col-md-3
         - @products.each do |product|
           %tr
-            %td.col-md-8
+            %td.col-md-7
               = product.name
             %td.col-md-1
               = product.unit
-            %td.col-md-2
+            %td.col-md-1
               = product.sort_order
-            %td.col-md-1
-              = link_to raw("<i class=\"glyphicon glyphicon-edit\"></i> Edit"), edit_product_path(product), :class => "btn btn-sm btn-default"
-            %td.col-md-1
-              = link_to raw("<i class=\"glyphicon glyphicon-trash\"></i> Delete"),  product_path(product), :method => :delete, :data => { :confirm => 'Are you sure?' },  :class => "btn btn-sm btn-default"
+            %td.col-md-3
+              .btn-group
+                = link_to raw("<i class=\"glyphicon glyphicon-edit\"></i> Edit"), edit_product_path(product), :class => "btn btn-sm btn-default"
+                = link_to raw("<i class=\"glyphicon glyphicon-trash\"></i> Delete"),  product_path(product), :method => :delete, :data => { :confirm => 'Are you sure?' },  :class => "btn btn-sm btn-default"
     - else
       %p
         No products found.

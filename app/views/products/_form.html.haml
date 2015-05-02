@@ -1,8 +1,16 @@
-= form_for @product, html: {class: "nifty_form"} do |f|
-  = label_tag :name, "Name"
-  = f.text_field :name
-  = label_tag :unit, "Unit"
-  = f.text_field :unit
-  = label_tag :sort_order, "Sort Order"
-  = f.text_field :sort_order
-  = f.submit "Save"
+= form_for @product, html: {class: "form-horizontal"} do |f|
+  .form-group
+    = label_tag :name, "Name",  { class: "col-sm-2 control-label"}
+    .col-sm-8
+      = f.text_field :name, { class: "form-control"}
+  .form-group
+    = label_tag :unit, "Unit",  { class: "col-sm-2 control-label"}
+    .col-sm-8
+      = f.text_field :unit, { class: "form-control"}
+  .form-group
+    = label_tag :sort_order, "Sort Order",  { class: "col-sm-2 control-label"}
+    .col-sm-8
+      = f.text_field :sort_order, { class: "form-control"}
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit "Save", { class: "btn btn-md btn-default"}

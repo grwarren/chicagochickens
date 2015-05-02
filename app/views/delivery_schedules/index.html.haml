@@ -12,8 +12,9 @@
             %td
               = d.date
             %td
-              = link_to raw("<i class=\"glyphicon glyphicon-edit\"></i> Edit"), edit_delivery_schedule_path(d), :class => "btn btn-sm btn-default"
-              = link_to raw("<i class=\"glyphicon glyphicon-trash\"></i> Delete"), delivery_schedule_path(d), :method => :delete, :data => { :confirm => 'Are you sure?' },  :class => "btn btn-sm btn-default"
+              .btn-group
+                = link_to raw("<i class=\"glyphicon glyphicon-edit\"></i> Edit"), edit_delivery_schedule_path(d), :class => "btn btn-sm btn-default"
+                = link_to raw("<i class=\"glyphicon glyphicon-trash\"></i> Delete"), delivery_schedule_path(d), :method => :delete, :data => { :confirm => 'Are you sure?' },  :class => "btn btn-sm btn-default"
     - else
       %p
         No Delivery dates found.
