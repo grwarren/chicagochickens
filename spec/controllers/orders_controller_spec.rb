@@ -56,7 +56,7 @@ describe OrdersController, :type => :controller do
       end
 
       it 'renders new with errors when user is missing' do
-        expected_errors = ["User can't be blank"]
+        expected_errors = ["User can't be blank", "User name can't be blank"]
         post :create,  order: { quantity: 10, user_name: 'Marques Marcello', product: product.id }
 
         expect(response).to render_template(:new)

@@ -13,7 +13,8 @@ module Requests
 
     def order
       user =  params[:user]
-      Order.new(quantity: params[:quantity], user: user, product: product, delivery_date: params[:delivery], user_name: user.name)
+      user_name = user.nil? ? "" : user.name
+      Order.new(quantity: params[:quantity], user: user, product: product, delivery_date: params[:delivery], user_name: user_name)
     end
 
   private
