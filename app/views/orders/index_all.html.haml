@@ -10,9 +10,9 @@
           %th= @orders.last.delivery_date
         - @orders.each do |order|
           %tr
-            %td= order.product.name
-            %td= order.user.name
-            %td= order.quantity
+            %td{:class => "product_name"}= order.product.name
+            %td{:class => "user_name"}= order.user.name
+            %td{:class => "quantity"}= order.quantity
     - else
       %p
         No Orders found
