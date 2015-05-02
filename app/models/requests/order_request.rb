@@ -13,13 +13,16 @@ module Requests
 
     def order
       user =  params[:user]
-      user_name = user.nil? ? "" : user.name
-      Order.new(quantity: params[:quantity], user: user, product: product, delivery_date: params[:delivery], user_name: user_name)
+      Order.new(quantity: params[:quantity], user: user, product: product, delivery_date: params[:delivery], user_name: user_name(user))
     end
 
   private
     def product
       Product.find_by(id: params[:product]) rescue nil
+    end
+
+    def user_name(user)
+      user.nil? ? "" : user.name
     end
 
     def product_exists?
