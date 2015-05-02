@@ -33,6 +33,7 @@ gem 'bootstrap-sass', '~> 3.3.4.1'
 gem 'active_attr', '~> 0.8.5'
 
 gem 'haml'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -49,6 +50,7 @@ group :development, :test do
   gem 'mongoid-rspec', '~> 2.1.0'
   gem "database_cleaner", '1.0.0.RC1'
   gem 'factory_girl_rails'
+  gem 'pry-rails'
 end
 
 source 'https://rails-assets.org' do
