@@ -12,7 +12,7 @@ class Order
 
   accepts_nested_attributes_for :product
 
-  validates_presence_of :product, :user, :quantity
+  validates_presence_of :product, :user, :quantity, :user_name
 
   def <=>(other)
     # use Array#<=> to compare the attributes
