@@ -12,7 +12,7 @@ module Requests
     end
 
     def order
-      Order.new(quantity: params[:quantity], user: params[:user], product: product, delivery_date: params[:delivery])
+      Order.new(quantity: params[:quantity], user: params[:user], product: product, delivery_date: params[:delivery], user_name: params['user.name'])
     end
 
   private

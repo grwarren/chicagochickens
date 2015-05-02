@@ -9,7 +9,7 @@ module Responses
       if valid?
          users_orders = user.orders.where(delivery_date: delivery_date)
 
-         new_orders = products.collect { | product | Order.new(user: user, product: product, quantity: 0, delivery_date: delivery_date) }
+         new_orders = products.collect { | product | Order.new(user: user, product: product, quantity: 0, delivery_date: delivery_date, user_name: user.name) }
          users_orders + new_orders
        else
          []

@@ -20,7 +20,7 @@ describe OrdersController, :type => :controller do
 
   describe 'POST /create' do
     let(:product) { create :product }
-    let(:valid_params) { { order: { quantity: 10, product: product.id } , user_id: user.user_id } }
+    let(:valid_params) { { order: { quantity: 10, product: product.id, user_name: 'Marques Marcello' } , user_id: user.user_id } }
 
     describe 'valid params' do
       it 'saves new order' do
@@ -42,7 +42,7 @@ describe OrdersController, :type => :controller do
     end
 
     describe 'invalid params' do
-      let(:invalid_params) { { order: { quantity: 10, product: '' }, user_id: user.user_id } }
+      let(:invalid_params) { { order: { quantity: 10, user_name: 'Marques Marcello', product: ''}, user_id: user.user_id } }
 
       it 'renders new with errors when product is missing' do
         expected_errors = ["Product can't be blank"]
@@ -57,7 +57,7 @@ describe OrdersController, :type => :controller do
 
       it 'renders new with errors when user is missing' do
         expected_errors = ["User can't be blank"]
-        post :create,  order: { quantity: 10, product: product.id }
+        post :create,  order: { quantity: 10, user_name: 'Marques Marcello', product: product.id }
 
         expect(response).to render_template(:new)
         expect(assigns :order).to_not be_valid

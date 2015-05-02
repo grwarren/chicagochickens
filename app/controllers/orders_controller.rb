@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_products, only: [:new, :create]
 
   def new
-    @orders = Responses::OrderResponse.new(user: @current_user).orders.sort()
+    @orders = Responses::OrderResponse.new(user: @current_user).orders.sort
   end
 
    def index_all
@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
    end
 
   def index
-     @orders = @current_user.orders.sort()
+     @orders = @current_user.orders.sort
   end
 
    def create
@@ -40,7 +40,7 @@ private
    end
 
   def order_params
-    params.require(:order).permit(:quantity, :delivery_date, :product)
+    params.require(:order).permit(:quantity, :delivery_date, :product, :user_name)
   end
 
   def set_products

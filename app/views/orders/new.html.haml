@@ -29,6 +29,7 @@
               .col-md-3
                 = o.select :quantity, options_for_select(quantity_options_for(p.object), o.object.quantity)
                 = p.hidden_field :unit
+                = o.hidden_field :user_name
         .col-md-4
           = submit_tag "Order", :class => "btn btn-primary"
       %hr/
