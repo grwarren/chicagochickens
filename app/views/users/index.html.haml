@@ -7,18 +7,18 @@
         %tr
           %th.col-md-4 User Id
           %th.col-md-4 Name
+          %th
         - @users.each do |user|
           %tr
-            %td.col-md-3
+            %td
               = user.user_id
-            %td.col-md-3
+            %td
               = user.name
-            %td.col-md-3
-              = link_to 'Edit', edit_user_path(user), :class => "btn btn-default"
-            %td.col-md-3
-              = link_to 'Orders', user_orders_url(user.user_id), :class => "btn btn-default"
-            %td.col-md-3
-              = link_to 'Delete',  user_path(user), :method => :delete, :data => { :confirm => 'Are you sure?' } ,  :class => "btn btn-default"
+            %td
+              .btn-group
+                = link_to 'Edit', edit_user_path(user), :class => "btn btn-sm btn-default"
+                = link_to 'Orders', user_orders_url(user.user_id), :class => "btn btn-sm btn-default"
+                = link_to 'Delete',  user_path(user), :method => :delete, :data => { :confirm => 'Are you sure?' } ,  :class => "btn btn-sm btn-default"
     - else
       %p
         No User found.
