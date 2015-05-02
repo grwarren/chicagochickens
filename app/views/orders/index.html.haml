@@ -7,7 +7,7 @@
       %table.table.table-bordered
         %tr
           %th Product
-          %th Quantity
+          %th= @orders.last.delivery_date
         - @orders.each do |order|
           %tr
             - if order.product.nil?
