@@ -3,7 +3,7 @@
     %h3.panel-title Current Orders
   .panel-body
     - if !@orders.empty?
-      %table.table.table-bordered
+      %table.table.table-bordered{:class => "orders"}
         %tr
           %th Product
           %th User

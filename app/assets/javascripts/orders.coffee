@@ -4,7 +4,7 @@ $(document).ready ->
   order_count = $(".table tr" ).size()
   product_name = ''
   current_product_total = 0
-  $(".table tr" ).each (index, order) ->
+  $(".orders tr" ).each (index, order) ->
     if (index == 0)
       return
 
