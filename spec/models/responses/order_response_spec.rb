@@ -18,6 +18,12 @@ describe  Responses::OrderResponse do
       expect(order_response.orders.size).to eq 2
     end
 
+    it 'created for each product and delivery schedule if user has not made any orders' do
+          create(:delivery_schedule, date: 2.weeks.from_now)
+          create_list :product, 2
+          expect(order_response.orders.size).to eq 4
+        end
+
     it 'merges existing orders and new orders for the user' do
       products = create_list :product, 2
       dove_eggs = create(:product, name: "Dove Eggs", unit: "Eggs")
