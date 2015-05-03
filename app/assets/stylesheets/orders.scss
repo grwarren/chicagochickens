@@ -1,3 +1,20 @@
 // Place all the styles related to the orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.adminImage {
+  border: thin solid blue;
+  width: 383px;
+  height: 600px;
+  float: left;
+  opacity: 0.6;
+  background-image: url("/assets/sparkles.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.mainLink {
+  a {
+    color: white;
+    font-size: 16px;
+  }
+}
