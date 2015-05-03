@@ -5,7 +5,8 @@ FactoryGirl.define do
 
     factory :user_with_orders do
       after(:create) do | user|
-        create_list(:order, 2, user: user)
+        create(:order, user: user, delivery_date: 1.week.from_now)
+        create(:order, user: user, delivery_date: 2.weeks.from_now)
       end
     end
   end

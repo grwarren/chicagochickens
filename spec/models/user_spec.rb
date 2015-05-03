@@ -20,4 +20,14 @@ describe User do
       expect(user.to_param).to eql("#{user.user_id}")
     end
   end
+
+  describe 'to_product_map' do
+    it 'returns product with map with two date keys' do
+      user = create :user_with_orders
+      create :delivery_schedule
+      expect(user.to_product_map.size).to eq(1)
+      expect(user.to_product_map["Chicken Eggs"].size).to eq(2)
+    end
+  end
+
 end

@@ -15,4 +15,16 @@ class User
   def to_param
     user_id.to_s
   end
+
+  def to_product_map
+    product_map = {}
+    orders.map(&:product).uniq.each do |product|
+      product_map[product.name] = {}
+    end
+
+    orders.each do |order|
+      product_map[order.product.name][order.delivery_date] = order.quantity
+    end
+    product_map
+  end
 end
