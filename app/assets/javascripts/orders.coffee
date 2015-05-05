@@ -1,7 +1,7 @@
 # is for id, . is for class
 $(document).ready ->
 
-  order_count = $(".table tr" ).size()
+  order_count = $(".orders tr" ).size()
   product_name = ''
   current_product_total = 0
   $(".orders tr" ).each (index, order) ->
@@ -31,11 +31,12 @@ $(document).ready ->
   return
 
 same_product = (order) ->
-  order.children().first().text("")
+  order.children(".delivery_date").text("")
+  order.children(".product_name").text("")
   return
 
 next_product = (order, total) ->
-  order.before("<tr class=\"totals\"><th></th><th>Total</th><th>" + total + "</th></tr>")
+  order.before("<tr class=\"totals\"><th></th><th></th><th>Total</th><th>" + total + "</th></tr>")
 
 last_product = (order, total) ->
-  order.after("<tr class=\"totals\"><th></th><th>Total</th><th>" + total + "</th></tr>")
+  order.after("<tr class=\"totals\"><th></th><th></th><th>Total</th><th>" + total + "</th></tr>")

@@ -25,7 +25,7 @@ module Responses
     end
 
     def delivery_dates
-      DeliverySchedule.all.map(&:date)
+      DeliverySchedule.all.order_by(:date.desc).map(&:date)
     end
   end
 end

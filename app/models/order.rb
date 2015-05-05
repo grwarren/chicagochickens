@@ -14,8 +14,4 @@ class Order
 
   validates_presence_of :product, :user, :quantity, :user_name
 
-  def <=>(other)
-    # use Array#<=> to compare the attributes
-    [self.product.sort_order] <=> [other.product.sort_order]
-  end
 end

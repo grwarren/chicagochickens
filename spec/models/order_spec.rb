@@ -26,16 +26,4 @@ describe Order do
     end
   end
 
-
-  it 'should sort by sort_order' do
-    order2 = build :order
-    order1 = build :order
-
-     order2.product.sort_order = 2
-     orders = [order2, order1].sort()
-
-     expect(orders[0].product.sort_order).to eq(1)
-     expect(orders[1].product.sort_order).to eq(2)
-  end
-
 end

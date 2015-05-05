@@ -3,15 +3,15 @@ class OrdersController < ApplicationController
   before_action :set_products, only: [:new, :create]
 
   def new
-    @orders = Responses::OrderResponse.new(user: @current_user).orders.sort
+    @orders = Responses::OrderResponse.new(user: @current_user).orders
   end
 
    def index_all
-    @orders = Order.all.order_by(:product.asc)
+    @orders = Order.all.order_by(:delivery_date.desc, :product.asc)
    end
 
   def index
-     @orders = @current_user.orders.sort
+     @orders = @current_user.orders.order_by(:delivery_date.desc, :product.asc)
   end
 
    def create

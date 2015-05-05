@@ -6,17 +6,14 @@
     - if !@orders.empty?
       %table.table.table-bordered
         %tr
+          %th Date
           %th Product
-          %th= @orders.last.delivery_date
+          %th Quantity
         - @orders.each do |order|
           %tr
-            - if order.product.nil?
-              %td &nbsp;
-              %td &nbsp;
-            - else
-              %td= order.product.name
-              %td
-                = pluralize_units(order.quantity, order.product)
+            %td= order.delivery_date
+            %td= order.product.name
+            %td= pluralize_units(order.quantity, order.product)
     - else
       %p
         No Orders found
