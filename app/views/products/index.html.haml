@@ -1,21 +1,25 @@
 .panel.panel-default
   .panel-heading
-    %h3.panel-title Current Products
+    .panel-title.col-md-3  Current Products
+    .col-md-offset-10
+      = link_to raw("<i class=\"glyphicon glyphicon-plus\"></i> New Product"), new_product_path, :class => "btn btn-sm btn-default"
+
+
   .panel-body
     - if !@products.empty?
       %table.table.table-bordered
         %tr
-          %th.col-md-7 Product Name
+          %th.col-md-6 Product Name
           %th.col-md-1 Unit
-          %th.col-md-1 Sort Order
+          %th.col-md-2 Sort Order
           %th.col-md-3
         - @products.each do |product|
           %tr
-            %td.col-md-7
+            %td.col-md-6
               = product.name
             %td.col-md-1
               = product.unit
-            %td.col-md-1
+            %td.col-md-2
               = product.sort_order
             %td.col-md-3
               .btn-group

@@ -1,6 +1,9 @@
 .panel.panel-default
   .panel-heading
-    %h3.panel-title Current Delivery dates
+    .panel-title.col-md-4 Current Delivery dates
+    .col-md-offset-10
+      = link_to raw("<i class=\"glyphicon glyphicon-plus\"></i> New Date"), new_delivery_schedule_path, :class => "btn btn-sm btn-default"
+
   .panel-body
     - if !@delivery_schedules.empty?
       %table.table.table-bordered
