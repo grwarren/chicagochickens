@@ -11,7 +11,21 @@ class OrdersController < ApplicationController
    end
 
   def index
-     @orders = @current_user.orders.order_by(:delivery_date.desc, :product.asc)
+    unless @current_user.nil?
+      @orders = @current_user.orders.order_by(:delivery_date.desc, :product.asc)
+
+      @grid = PivotTable::Grid.new do |g|
+        g.source_data = @orders.to_a
+        g.column_name = :delivery_date
+        g.row_name = :product
+        g.value_name   = :quantity
+      end
+
+      @grid.build
+
+
+    end
+
   end
 
    def create

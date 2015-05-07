@@ -4,6 +4,7 @@
     .col-md-offset-8= link_to  'Change Order', new_user_order_path(@current_user.user_id), :class => "btn btn-default"
   .panel-body
     - if !@orders.empty?
+      Here is the list of data:
       %table.table.table-bordered
         %tr
           %th Date
@@ -14,6 +15,18 @@
             %td= order.delivery_date
             %td= order.product.name
             %td= pluralize_units(order.quantity, order.product)
+
+      Here is the pivot table:
+      %table.table.table-bordered
+        %tr
+          %th &nbsp
+          - @grid.column_headers.each do |header|
+            %th= header
+        - @grid.rows.each do |row|
+          %tr
+            %td.h4= row.header.name
+            - row.data.each do |order|
+              %td= pluralize_units(order.quantity, order.product)
     - else
       %p
         No Orders found
