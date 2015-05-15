@@ -1,0 +1,20 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title Current Orders
+  .panel-body
+    - if !@orders.empty?
+      %table.table.table-bordered{:class => "orders"}
+        %tr
+          %th Date
+          %th Product
+          %th User
+          %th Quantity
+        - @orders.each do |order|
+          %tr
+            %td{:class => "delivery_date"}= order.delivery_date
+            %td{:class => "product_name"}= order.product.name
+            %td{:class => "user_name"}= order.user.name
+            %td{:class => "quantity"}= order.quantity
+    - else
+      %p
+        No Orders found

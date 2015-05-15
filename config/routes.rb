@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'main#index'
   get 'orders' => 'orders#index_all'
+  get 'nextOrder' => 'orders#next_order'
   post 'orders' => 'orders#create'
   patch '/users/:user_id/orders' => 'orders#update'
 

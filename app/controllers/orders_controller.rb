@@ -8,27 +8,35 @@ class OrdersController < ApplicationController
 
    def index_all
     @orders = Order.all.order_by(:delivery_date.desc, :product.asc)
+     build_grid(@orders)
    end
+
+  def next_order
+    next_delivery_date =  DeliverySchedule.where(:date.gte => Date.today).first().date
+    @orders = Order.where(delivery_date:  next_delivery_date).order_by(:product.asc, :user.asc)
+     build_grid(@orders)
+  end
 
   def index
     unless @current_user.nil?
       @orders = @current_user.orders.order_by(:delivery_date.desc, :product.asc)
-
-      @grid = PivotTable::Grid.new do |g|
-        g.source_data = @orders.to_a
-        g.column_name = :delivery_date
-        g.row_name = :product
-        g.value_name   = :quantity
-      end
-
-      @grid.build
-
-
+      build_grid(@orders)
     end
 
   end
 
-   def create
+  def build_grid(orders)
+    @grid = PivotTable::Grid.new do |g|
+      g.source_data = orders.to_a
+      g.column_name = :delivery_date
+      g.row_name = :product
+      g.value_name = :quantity
+    end
+
+    @grid.build
+  end
+
+  def create
      params = order_params.merge(user: @current_user)
      order_request = Requests::OrderRequest.new(params: params)
      if order_request.save
