@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
 
   def new
     @orders = Responses::OrderResponse.new(user: @current_user).orders
+    build_grid(@orders)
   end
 
    def index_all
@@ -13,7 +14,7 @@ class OrdersController < ApplicationController
 
   def next_order
     next_delivery_date =  DeliverySchedule.where(:date.gte => Date.today).first().date
-    @orders = Order.where(delivery_date:  next_delivery_date).order_by(:product.asc, :user.asc)
+    @orders = Order.and({delivery_date:  next_delivery_date}, {quantity: { "$gt" => 0 }}).order_by(:product.asc, :user.asc)
      build_grid(@orders)
   end
 

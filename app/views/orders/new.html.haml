@@ -6,30 +6,27 @@
       .alert.alert-warning{:role => "alert"}
         %strong No orders for this user
     - else
-      .row
-        .col-md-4
-          -#%h4 Delivery Date
-        .col-md-4
-          -#%h4= @next_delivery_date.strftime("%m-%d-%Y")
       = form_for @current_user, url:user_orders_url , html: {class: "nifty_form"} do | f |
         = f.text_field :user_id, type: "hidden"
         = f.text_field :name, type: "hidden"
-        %hr/
-        = f.fields_for :orders do |o|
-          .row
-            .col-md-3
-              = o.object.delivery_date
-              = o.hidden_field :delivery_date
-            = o.fields_for :product do | p|
-              .col-md-3
-                = p.hidden_field :id
-                = p.object.name
-                = p.hidden_field :name
-                = p.hidden_field :sort_order
-              .col-md-3
-                = o.select :quantity, options_for_select(quantity_options_for(p.object), o.object.quantity)
-                = p.hidden_field :unit
-                = o.hidden_field :user_name
+        %table.table.table-bordered
+          %tr
+            %th &nbsp
+            - @grid.column_headers.each do |header|
+              %th= header
+          - @grid.rows.each do |row|
+            %tr
+              %td.h4= row.header.name
+              - row.data.each do |order|
+                =f.fields_for :orders, order do |o|
+                  %td
+                    = o.hidden_field :delivery_date
+                    = o.hidden_field :user_name
+                    = o.fields_for :product do | p|
+                      = p.hidden_field :id
+                      = p.hidden_field :name
+                      = p.hidden_field :sort_order
+                      = o.select :quantity, options_for_select(quantity_options_for(p.object), o.object.quantity)
+                      = p.hidden_field :unit
         .col-md-4
           = submit_tag "Order", :class => "btn btn-primary"
-      %hr/
