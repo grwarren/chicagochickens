@@ -1,5 +1,12 @@
 # is for id, . is for class
 $(document).ready ->
+  $(".order-minus-btn").click (e) ->
+    changeElementValue(this, decrement)
+    e.preventDefault
+
+  $(".order-plus-btn").click (e) ->
+    changeElementValue(this, increment)
+    e.preventDefault
 
   order_count = $(".orders tr" ).size()
   product_name = ''
@@ -24,11 +31,23 @@ $(document).ready ->
     current_product_total += parseInt($(order).children(".quantity").text())
     console.log(current_product_total)
 
-#    Don't forget final total
+    # Don't forget final total
     if (index + 1 == order_count)
       last_product($(order), current_product_total)
-
   return
+
+changeElementValue = (element, appliedFunc) ->
+  inputField = $(element).parents("td").find('input[type="text"]').first()
+  value = inputField.val()
+  inputField.val(appliedFunc(value))
+
+increment = (val) ->
+  result = parseInt(val) + 1
+  if result <= 24 then result else alert('We do have that much eggs'); 0;
+
+decrement = (val) ->
+  result = parseInt(val) - 1
+  if result >= 0 then result else 0
 
 same_product = (order) ->
   order.children(".delivery_date").text("")

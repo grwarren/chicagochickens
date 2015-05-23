@@ -26,6 +26,26 @@ class OrdersController < ApplicationController
 
   end
 
+  def create
+     params = order_params.merge(user: @current_user)
+     order_request = Requests::OrderRequest.new(params: params)
+     if order_request.save
+       redirect_to user_orders_path(@current_user) , notice: 'Your order has been saved'
+     else
+       @order = order_request.order
+       render :new
+     end
+  end
+
+  def update
+     if @current_user.update(user_params)
+       redirect_to user_orders_url(@current_user), notice: "Your orders were successfully updated."
+     else
+       render :edit
+     end
+  end
+
+private
   def build_grid(orders)
     @grid = PivotTable::Grid.new do |g|
       g.source_data = orders.to_a
@@ -37,27 +57,6 @@ class OrdersController < ApplicationController
     @grid.build
   end
 
-  def create
-     params = order_params.merge(user: @current_user)
-     order_request = Requests::OrderRequest.new(params: params)
-     if order_request.save
-       redirect_to user_orders_path(@current_user) , notice: 'Your order has been saved'
-     else
-       @order = order_request.order
-       render :new
-     end
-   end
-
-    def update
-      puts "order update_params = " + user_params.inspect
-      if @current_user.update(user_params)
-        redirect_to user_orders_url(@current_user), notice: "Your orders were successfully updated."
-      else
-        render action: 'edit'
-      end
-  end
-
-private
    def user_params
     params.require(:user).permit!
    end
