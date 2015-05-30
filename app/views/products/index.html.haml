@@ -1,9 +1,15 @@
 .panel.panel-default
-  .panel-heading
-    .panel-title.col-md-3  Current Products
-    .col-md-offset-10
-      = link_to raw("<i class=\"glyphicon glyphicon-plus\"></i> New Product"), new_product_path, :class => "btn btn-sm btn-default"
+  .panel-heading.hidden-xs
+    .panel-title
+      .col-sm-6  Current Products
+      .col-sm-3.col-sm-offset-3
+        = link_to raw("<i class=\"glyphicon glyphicon-plus\"></i> New Product"), new_product_path, :class => "btn btn-sm btn-default"
 
+  .panel-heading.hidden-sm.hidden-md.hidden-lg
+    .panel-title
+      .col-xs-6  Current Products
+      .col-xs-4.col-xs-offset-1
+        = link_to raw("<i class=\"glyphicon glyphicon-plus\"></i> New Product"), new_product_path, :class => "btn btn-sm btn-default"
 
   .panel-body
     - if !@products.empty?

@@ -1,14 +1,21 @@
 .panel.panel-default
-  .panel-heading
+  .panel-heading.hidden-xs
     .panel-title.col-xs-6= user_orders_headers(@current_user)
     .col-xs-2.col-xs-offset-3= link_to  'Change Order', new_user_order_path(@current_user.user_id), :class => "btn btn-default"
+  .panel-heading.hidden-sm.hidden-md.hidden-lg
+    .panel-title.col-xs-5= 'Orders'
+    .col-xs-2.col-xs-offset-3= link_to  'Change', new_user_order_path(@current_user.user_id), :class => "btn btn-default"
+
   .panel-body
     - if !@orders.empty?
       %table.table.table-bordered
         %tr
           %th &nbsp
           - @grid.column_headers.each do |header|
-            %th= header
+            -if header.past?
+              %th= header.strftime("%b %d")
+            -else
+              %th=link_to  header.strftime("%b %d"),  build_edit_path(@current_user.user_id, header)
         - @grid.rows.each do |row|
           %tr
             %td.h4= row.header.name

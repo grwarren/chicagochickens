@@ -2,6 +2,11 @@ class OrdersController < ApplicationController
   before_action :set_current_user
   before_action :set_products, only: [:new, :create]
 
+  def edit
+    @orders = @current_user.orders.where(delivery_date: params[:deliveryDate])
+    build_grid(@orders)
+  end
+
   def new
     @orders = Responses::OrderResponse.new(user: @current_user).orders
     build_grid(@orders)

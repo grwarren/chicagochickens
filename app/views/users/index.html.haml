@@ -1,20 +1,21 @@
 .panel.panel-default
   .panel-heading
-    .panel-title.col-md-3 Current Users
-    .col-md-offset-10
+    .panel-title
+      .col-xs-8 Current Users
+      .col-xs-1.col-xs-offset-2
       = link_to raw("<i class=\"glyphicon glyphicon-plus\"></i> New User"), new_user_path, :class => "btn btn-sm btn-default"
   .panel-body
     - if !@users.empty?
       %table.table.table-bordered
         %tr
-          %th.col-md-2 User Id
-          %th.col-md-6 Name
+          %th.col-sm-2 User Id
+          %th.col-sm-6 Name
           %th
         - @users.each do |user|
           %tr
-            %td.col-md-2
+            %td.col-sm-2
               = user.user_id
-            %td.col-md-6
+            %td.col-sm-6
               = user.name
             %td
               .btn-group
