@@ -17,19 +17,16 @@ $(document).ready ->
 
     if (index == 1)
       product_name = $(order).children(".product_name").text()
-      console.log(product_name)
     else
       next_product_name = $(order).children(".product_name").text()
       if (next_product_name == product_name)
         same_product($(order))
       else
         product_name = next_product_name
-        console.log(product_name)
         next_product($(order), current_product_total)
         current_product_total = 0
 
     current_product_total += parseInt($(order).children(".quantity").text())
-    console.log(current_product_total)
 
     # Don't forget final total
     if (index + 1 == order_count)
