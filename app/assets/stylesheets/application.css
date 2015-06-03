@@ -88,6 +88,14 @@
     width: 1200px
 }
 
+.input-sm-table {
+    width: 120px;
+}
+
+.btn-sm-table {
+    width: 60px;
+}
+
 .visible-md-block {
     border:  1px solid red;
     width: 992px
