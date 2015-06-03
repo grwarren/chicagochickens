@@ -25,7 +25,7 @@ module Responses
     end
 
     def delivery_dates
-      DeliverySchedule.all.order_by(:date.desc).map(&:date)
+      DeliverySchedule.where(:date.gte => Date.today).order_by(:date.asc).limit(2).map(&:date)
     end
   end
 end
