@@ -9,59 +9,30 @@
       = form_for @current_user, url:user_orders_url , html: {class: "nifty_form"} do | f |
         = f.text_field :user_id, type: "hidden"
         = f.text_field :name, type: "hidden"
-        .hidden-xs
-          %table.table.table-bordered
+        %table.table.table-bordered
+          %tr
+            %th &nbsp
+            - @grid.column_headers.each do |header|
+              %th= header.strftime("%b %d")
+          - @grid.rows.each do |row|
             %tr
-              %th &nbsp
-              - @grid.column_headers.each do |header|
-                %th= header.strftime("%b %d")
-            - @grid.rows.each do |row|
-              %tr
-                %td.h4.col-lg-4= row.header.name
-                - row.data.each do |order|
-                  =f.fields_for :orders, order do |o|
-                    %td.col-lg-3
-                      = o.hidden_field :delivery_date
-                      = o.hidden_field :user_name
-                      = o.fields_for :product do | p|
-                        = p.hidden_field :id
-                        = p.hidden_field :name
-                        = p.hidden_field :sort_order
-                        .input-group
-                          = o.text_field :quantity, class: 'form-control '
-                          %span.input-group-btn
-                            %a.btn.btn-default.order-minus-btn
-                              %span.glyphicon.glyphicon-minus-sign
-                            %a.btn.btn-default.order-plus-btn
-                              %span.glyphicon.glyphicon-plus-sign
-                        = p.hidden_field :unit
-          .col-md-4
-            = submit_tag "Save", :class => "btn btn-primary"
-
-        .hidden-md.hidden-lg
-          %table.table.table-bordered
-            %tr
-              %th &nbsp
-              - @grid.column_headers.each do |header|
-                %th= header.strftime("%b %d")
-            - @grid.rows.each do |row|
-              %tr
-                %td.h4.col-lg-4= row.header.name
-                - row.data.each do |order|
-                  =f.fields_for :orders, order do |o|
-                    %td.col-lg-3
-                      = o.hidden_field :delivery_date
-                      = o.hidden_field :user_name
-                      = o.fields_for :product do | p|
-                        = p.hidden_field :id
-                        = p.hidden_field :name
-                        = p.hidden_field :sort_order
-                        = o.text_field :quantity, class: 'form-control input-sm-table'
+              %td.h4.col-lg-4= row.header.name
+              - row.data.each do |order|
+                =f.fields_for :orders, order do |o|
+                  %td.col-lg-3
+                    = o.hidden_field :delivery_date
+                    = o.hidden_field :user_name
+                    = o.fields_for :product do | p|
+                      = p.hidden_field :id
+                      = p.hidden_field :name
+                      = p.hidden_field :sort_order
+                      .input-group
+                        = o.text_field :quantity, class: 'form-control '
                         %span.input-group-btn
-                          %a.btn.btn-default.order-minus-btn.btn-sm-table
+                          %a.btn.btn-default.order-minus-btn
                             %span.glyphicon.glyphicon-minus-sign
-                          %a.btn.btn-default.order-plus-btn.btn-sm-table
+                          %a.btn.btn-default.order-plus-btn
                             %span.glyphicon.glyphicon-plus-sign
-                        = p.hidden_field :unit
-          .col-md-4
-            = submit_tag "Save", :class => "btn btn-primary"
+                      = p.hidden_field :unit
+        .col-md-4
+          = submit_tag "Save", :class => "btn btn-primary"
