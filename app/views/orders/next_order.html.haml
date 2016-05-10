@@ -1,6 +1,6 @@
 -# This shows all the orders for the next delivery date
 .panel.panel-default
-  - if !@orders.empty?
+  - if !@orders.nil?
     .panel-heading
       %h3.panel-title
         =@orders.first.delivery_date
@@ -20,4 +20,4 @@
   - else
     .panel-body
       %p
-        No Orders found
+        No Future Order found

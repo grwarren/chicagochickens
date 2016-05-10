@@ -18,9 +18,12 @@ class OrdersController < ApplicationController
    end
 
   def next_order
-    next_delivery_date =  DeliverySchedule.where(:date.gte => Date.today).first().date
-    @orders = Order.and({delivery_date:  next_delivery_date}, {quantity: { "$gt" => 0 }}).order_by(:product.asc, :user.asc)
-     build_grid(@orders)
+    future_delivery_dates = DeliverySchedule.where(:date.gte => Date.today)
+    unless future_delivery_dates.first().nil?
+      next_delivery_date =  future_delivery_dates.first().date
+      @orders = Order.and({delivery_date:  next_delivery_date}, {quantity: { "$gt" => 0 }}).order_by(:product.asc, :user.asc)
+      build_grid(@orders)
+    end
   end
 
   def index
