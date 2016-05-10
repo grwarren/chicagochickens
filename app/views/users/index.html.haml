@@ -9,14 +9,17 @@
       %table.table.table-bordered
         %tr
           %th.col-sm-2 User Id
-          %th.col-sm-6 Name
+          %th.col-sm-5 Name
+          %th.col-sm-1 Loc
           %th
         - @users.each do |user|
           %tr
             %td.col-sm-2
               = user.user_id
-            %td.col-sm-6
+            %td.col-sm-5
               = user.name
+            %td.col-sm-1
+              = user.pickup_location
             %td
               .btn-group
                 = link_to raw("<i class=\"glyphicon glyphicon-edit\"></i> Edit"), edit_user_path(user), :class => "btn btn-sm btn-default"

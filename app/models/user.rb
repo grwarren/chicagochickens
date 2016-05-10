@@ -4,6 +4,7 @@ class User
 
   field :user_id, type: Integer
   field :name, type: String
+  field :pickup_location, type: String
 
   has_many :orders
 
