@@ -9,11 +9,14 @@
       %table.table.table-bordered
         %tr
           %th Delivery Date
+          %th Location
           %th
         - @delivery_schedules.each do |d|
           %tr
             %td
               = d.date
+            %td
+              = d.pickup_location
             %td
               .btn-group
                 = link_to raw("<i class=\"glyphicon glyphicon-edit\"></i> Edit"), edit_delivery_schedule_path(d), :class => "btn btn-sm btn-default"

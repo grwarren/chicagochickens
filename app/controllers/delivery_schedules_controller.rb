@@ -39,7 +39,7 @@ class DeliverySchedulesController < ApplicationController
 
   private
     def delivery_schedule_params
-      params.require(:delivery_schedule).permit(:date)
+      params.require(:delivery_schedule).permit(:date, :pickup_location)
     end
 
     def set_schedule

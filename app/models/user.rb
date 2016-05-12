@@ -8,7 +8,7 @@ class User
 
   has_many :orders
 
-  validates_presence_of :name, :user_id
+  validates_presence_of :name, :user_id, :pickup_location
   validates_uniqueness_of :user_id
 
   accepts_nested_attributes_for :orders
