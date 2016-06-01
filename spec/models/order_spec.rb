@@ -15,7 +15,7 @@ describe Order do
 
   describe 'save' do
     let(:order) { build :order }
-    let(:product) { create :product }
+    let(:product) { build :product }
 
     it 'saves with product' do
       order.product = product

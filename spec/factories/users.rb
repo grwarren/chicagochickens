@@ -1,13 +1,16 @@
 FactoryGirl.define do
+
+  sequence(:user_id) { |n| "10#{n}".to_i }
+
   factory :user do
-    sequence(:user_id) { |n| "10#{n}".to_i }
+    user_id { FactoryGirl.generate(:user_id) }
     name 'Marques Marcello'
     pickup_location 'TW'
 
     factory :user_with_orders do
-      after(:create) do | user|
-        create(:order, user: user, delivery_date: 1.week.from_now)
-        create(:order, user: user, delivery_date: 2.weeks.from_now)
+      after(:build) do | user|
+        build(:order, user: user, delivery_date: 1.week.from_now)
+        build(:order, user: user, delivery_date: 2.weeks.from_now)
       end
     end
   end
