@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', '5.0.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.1.1'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -27,10 +27,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'mongoid', '~> 4.0.2'
+gem 'mongoid', '~> 6.0.3'
 gem 'bson_ext'
 gem 'bootstrap-sass', '~> 3.3.4.1'
-gem 'active_attr', '~> 0.8.5'
+gem 'active_attr', '~> 0.9.0'
 
 gem 'haml'
 gem 'pivot_table'
@@ -48,8 +48,8 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'rspec-expectations'
-  gem 'mongoid-rspec', '~> 2.1.0'
-  gem "database_cleaner", '1.0.0.RC1'
+  #gem 'mongoid-rspec', '~> 3.0.0'
+  gem "database_cleaner", '1.5.3'
   gem 'factory_girl_rails'
   gem 'pry-rails'
 end
