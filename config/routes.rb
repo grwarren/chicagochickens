@@ -10,6 +10,11 @@ Rails.application.routes.draw do
   post 'orders' => 'orders#create'
   get 'nextOrder' => 'orders#next_order'
   patch '/users/:user_id/orders' => 'orders#update'
+  # user login routes
+  get    '/signup' => 'users#new'
+  get    '/login' => 'sessions#new'
+  post   '/login' => 'sessions#create'
+  delete '/logout' => 'sessions#destroy'
 
   resources :delivery_schedules
   resources :users do
