@@ -1,15 +1,20 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
+  include ActiveModel::SecurePassword
 
   field :user_id, type: Integer
   field :name, type: String
+  field :email, type: String
   field :pickup_location, type: String
+
+  field :password_digest, :type => String
+  has_secure_password
 
   has_many :orders
 
-  validates_presence_of :name, :user_id, :pickup_location
-  validates_uniqueness_of :user_id
+  validates_presence_of :user_id, :name, :email, :pickup_location
+  validates_uniqueness_of :user_id, :email
 
   accepts_nested_attributes_for :orders
 

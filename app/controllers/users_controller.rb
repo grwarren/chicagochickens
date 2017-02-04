@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to users_url, notice: "New User Created"
     else
+      flash.now[:error] = "Error creating user #{@user.errors.messages}"
       render new_user_path
     end
   end

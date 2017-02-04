@@ -31,6 +31,7 @@ gem 'mongoid', '~> 6.0.3'
 gem 'bson_ext'
 gem 'bootstrap-sass', '~> 3.3.4.1'
 gem 'active_attr', '~> 0.9.0'
+gem 'bcrypt'
 
 gem 'haml'
 gem 'pivot_table'
