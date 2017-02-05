@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_current_user
+  before_action :current_user
   before_action :set_products, only: [:new, :create]
 
   def edit
@@ -27,6 +27,7 @@ class OrdersController < ApplicationController
   end
 
   def index
+    logger.debug "ORDERS CONTROLLER: #{@current_user}"
     unless @current_user.nil?
       @orders = @current_user.orders.order_by(:delivery_date.desc, :product.asc)
       build_grid(@orders)

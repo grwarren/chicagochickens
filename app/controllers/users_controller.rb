@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      log_in @user
       redirect_to users_url, notice: "New User Created"
     else
       flash.now[:error] = "Error creating user #{@user.errors.messages}"
