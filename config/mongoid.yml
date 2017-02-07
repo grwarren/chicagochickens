@@ -107,8 +107,8 @@ production:
      # replica set connection setup.
      # Use environment variables or a config file to keep your
      # credentials safe.
-     uri: 'mongodb://heroku_app36042153:1mqf2fo5pj3tr1hh0vvp78823v@ds061721.mongolab.com:61721/heroku_app36042153'
-#     uri:<%= ENV['MONGOLAB_URI'] %>
+     #uri: mongodb://username:password@host1:port1,host2:port2/database?replicaSet=<replicaSetName>
+     uri: 'mongodb://heroku_cwcfg1k1:fu9t8efb1vm042kt0h8v1trrsb@ds145019.mlab.com:45019/heroku_cwcfg1k1'
 
      options:
        # max_retries specifies the number of times to attempt
