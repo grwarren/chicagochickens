@@ -9,4 +9,10 @@ RSpec.describe SessionsController, type: :controller do
     end
   end
 
+  describe "POST #create" do
+    valid_params = { session: { password: "foobar", email: "user@example.com" } }
+
+    post login_path valid_params
+  end
+
 end
