@@ -40,7 +40,7 @@ changeElementValue = (element, appliedFunc) ->
 
 increment = (val) ->
   result = parseInt(val) + 1
-  if result <= 24 then result else alert('We do have that much eggs'); 0;
+  if result <= 6 then result else alert('Limit 6 per person'); 6;
 
 decrement = (val) ->
   result = parseInt(val) - 1
