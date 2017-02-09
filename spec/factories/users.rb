@@ -6,6 +6,8 @@ FactoryGirl.define do
     user_id { FactoryGirl.generate(:user_id) }
     name 'Marques Marcello'
     pickup_location 'TW'
+    password 'pwd'
+    email 'x@y.com'
 
     factory :user_with_orders do
       after(:build) do | user|

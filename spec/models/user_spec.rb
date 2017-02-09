@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe User do
+  before {pending("mongoid-rspec")}
   it 'has valid factories' do
     expect(build :user).to be_valid
     expect(build :user_with_orders).to be_valid
@@ -20,12 +21,15 @@ describe User do
     end
   end
 
-  describe 'to_product_map' do
-    it 'returns product with map with two date keys' do
-      user = build :user_with_orders
-      build :delivery_schedule
-      expect(user.to_product_map.size).to eq(1)
-      expect(user.to_product_map["Chicken Eggs"].size).to eq(2)
+  describe 'is_admin' do
+    it 'returns false when user is not admin' do
+      user = build :user
+      expect(user.is_admin).to eq(false)
+    end
+
+    it 'returns true when user is admin' do
+      user = build(:user, user_id: 1)
+      expect(user.is_admin).to eq(true)
     end
   end
 
