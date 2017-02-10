@@ -12,7 +12,7 @@
         - @orders.each do |order|
           %tr
             %td{:class => "delivery_date"}= order.delivery_date
-            %td{:class => "product_name"}= order.product.name
+            %td{:class => "product_name"}= order.product_name
             %td{:class => "user_name"}= order.user.name
             %td{:class => "quantity"}= order.quantity
     - else

@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :current_user
-  before_action :set_products, only: [:new, :create]
+  before_action :set_products, only: [:new, :create, :index]
 
   def edit
     @orders = @current_user.orders.where(delivery_date: params[:deliveryDate])
@@ -59,7 +59,7 @@ private
     @grid = PivotTable::Grid.new do |g|
       g.source_data = orders.to_a
       g.column_name = :delivery_date
-      g.row_name = :product
+      g.row_name = :product_name
       g.value_name = :quantity
     end
 
@@ -71,7 +71,7 @@ private
    end
 
   def order_params
-    params.require(:order).permit(:quantity, :delivery_date, :product, :user_name)
+    params.require(:order).permit(:quantity, :delivery_date, :product_name, :user_name)
   end
 
   def set_products

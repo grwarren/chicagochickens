@@ -18,9 +18,9 @@
               %th=link_to  header.strftime("%b %d"),  build_edit_path(@current_user.user_id, header)
         - @grid.rows.each do |row|
           %tr
-            %td.h4= row.header.name
+            %td.h4= row.header
             - row.data.each do |order|
-              %td= pluralize_units(order.quantity, order.product)
+              %td= pluralize_units(order.quantity, order.product_name)
 
       %table.table.table-bordered.hidden
         %tr
@@ -30,8 +30,8 @@
         - @orders.each do |order|
           %tr
             %td= order.delivery_date
-            %td= order.product.name
-            %td= pluralize_units(order.quantity, order.product)
+            %td= order.product_name
+            %td= pluralize_units(order.quantity, order.product_name)
     - else
       %p
         No Orders found

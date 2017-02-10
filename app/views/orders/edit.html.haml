@@ -16,17 +16,12 @@
               %th= header.strftime("%b %d")
           - @grid.rows.each do |row|
             %tr
-              %td.h4= row.header.name
+              %td.h4= row.header
               - row.data.each do |order|
                 =f.fields_for :orders, order do |o|
                   %td
                     = o.hidden_field :delivery_date
                     = o.hidden_field :user_name
-                    = o.fields_for :product do | p|
-                      = p.hidden_field :id
-                      = p.hidden_field :name
-                      = p.hidden_field :sort_order
-                      = o.select :quantity, options_for_select(quantity_options_for(p.object), o.object.quantity)
-                      = p.hidden_field :unit
+                    = o.select :quantity, options_for_select(quantity_options_for(order.product_name), o.object.quantity)
         .col-md-4
           = submit_tag "Save", :class => "btn btn-primary"
