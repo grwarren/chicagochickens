@@ -12,10 +12,10 @@ class OrdersController < ApplicationController
     build_grid(@orders)
   end
 
-   def index_all
+  def index_all
     @orders = Order.all.order_by(:delivery_date.desc, :product.asc)
-     build_grid(@orders)
-   end
+    build_grid(@orders)
+  end
 
   def myorders
     next_delivery_date = DeliverySchedule.where(:date.gte => Date.today).order_by(:date.asc).limit(1)
@@ -28,8 +28,8 @@ class OrdersController < ApplicationController
   def next_order
     future_delivery_dates = DeliverySchedule.where(:date.gte => Date.today)
     unless future_delivery_dates.first.nil?
-      next_delivery_date =  future_delivery_dates.first.date
-      @orders = Order.and({delivery_date:  next_delivery_date}, {quantity: { "$gt" => 0 }}).order_by(:product.asc, :user.asc)
+      next_delivery_date = future_delivery_dates.first.date
+      @orders = Order.and({delivery_date: next_delivery_date}, {quantity: {"$gt" => 0}}).order_by(:product.asc, :user.asc)
       build_grid(@orders)
     end
   end
@@ -44,25 +44,25 @@ class OrdersController < ApplicationController
   end
 
   def create
-     params = order_params.merge(user: @current_user)
-     order_request = Requests::OrderRequest.new(params: params)
-     if order_request.save
-       redirect_to user_orders_path(@current_user) , notice: 'Your order has been saved'
-     else
-       @order = order_request.order
-       render :new
-     end
+    params = order_params.merge(user: @current_user)
+    order_request = Requests::OrderRequest.new(params: params)
+    if order_request.save
+      redirect_to user_orders_path(@current_user), notice: 'Your order has been saved'
+    else
+      @order = order_request.order
+      render :new
+    end
   end
 
   def update
-     if @current_user.update(user_params)
-       redirect_to user_orders_url(@current_user), notice: "Your orders were successfully updated."
-     else
-       render :edit
-     end
+    if @current_user.update(user_params)
+      redirect_to user_orders_url(@current_user), notice: "Your orders were successfully updated."
+    else
+      render :edit
+    end
   end
 
-private
+  private
   def build_grid(orders)
     @grid = PivotTable::Grid.new do |g|
       g.source_data = orders.to_a
@@ -74,9 +74,9 @@ private
     @grid.build
   end
 
-   def user_params
+  def user_params
     params.require(:user).permit!
-   end
+  end
 
   def order_params
     params.require(:order).permit(:quantity, :delivery_date, :product_name, :user_name)

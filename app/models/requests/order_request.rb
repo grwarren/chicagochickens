@@ -12,11 +12,11 @@ module Requests
     end
 
     def order
-      user =  params[:user]
+      user = params[:user]
       Order.new(quantity: params[:quantity], user: user, product_name: product.name, delivery_date: params[:delivery], user_name: user_name(user))
     end
 
-  private
+    private
     def product
       Product.find_by(id: params[:product]) rescue nil
     end

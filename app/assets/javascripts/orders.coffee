@@ -8,10 +8,10 @@ $(document).ready ->
     changeElementValue(this, increment)
     e.preventDefault
 
-  order_count = $(".orders tr" ).length
+  order_count = $(".orders tr").length
   product_name = ''
   current_product_total = 0
-  $(".orders tr" ).each (index, order) ->
+  $(".orders tr").each (index, order) ->
     if (index == 0)
       return
 

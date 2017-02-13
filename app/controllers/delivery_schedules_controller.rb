@@ -38,11 +38,11 @@ class DeliverySchedulesController < ApplicationController
   end
 
   private
-    def delivery_schedule_params
-      params.require(:delivery_schedule).permit(:date, :pickup_location)
-    end
+  def delivery_schedule_params
+    params.require(:delivery_schedule).permit(:date, :pickup_location)
+  end
 
-    def set_schedule
-      @delivery_schedule = DeliverySchedule.find_by(id: params[:id])
-    end
+  def set_schedule
+    @delivery_schedule = DeliverySchedule.find_by(id: params[:id])
+  end
 end

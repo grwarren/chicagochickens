@@ -9,6 +9,6 @@ module UsersHelper
   end
 
   def user_orders_headers(user)
-    user.nil? ? "Orders" :  "Orders for #{user.name}"
+    user.nil? ? "Orders" : "Orders for #{user.name}"
   end
 end
