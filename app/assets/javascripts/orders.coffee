@@ -34,7 +34,7 @@ $(document).ready ->
   return
 
 changeElementValue = (element, appliedFunc) ->
-  inputField = $(element).parents("td").find('input[type="text"]').first()
+  inputField = $(element).parents("div.input-group").find('input[type="text"]').first()
   value = inputField.val()
   inputField.val(appliedFunc(value))
 
