@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ProductsController, type: :controller do
 
   describe "POST #create" do
-   let(:product) { build :product }
+    let(:product) { build :product }
 
     it "redirects to all product path" do
       post :create, product: product.attributes

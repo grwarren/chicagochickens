@@ -50,7 +50,9 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'rspec-expectations'
+  # Using fork of mongoid-rspec that supports mogoid 6.0
   #gem 'mongoid-rspec', '~> 3.0.0'
+  gem 'mongoid-rspec', :git => 'https://github.com/chocoken517/mongoid-rspec.git'
   gem "database_cleaner", '1.5.3'
   gem 'factory_girl_rails'
   gem 'pry-rails'

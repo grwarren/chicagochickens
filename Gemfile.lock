@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/chocoken517/mongoid-rspec.git
+  revision: 6759efd508fa24dbe0ad54c41353fa2c8e86dc3f
+  specs:
+    mongoid-rspec (4.0.0)
+      mongoid (~> 6.0)
+      rake
+      rspec (~> 3.3)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -209,6 +218,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mongoid (~> 6.0.3)
+  mongoid-rspec!
   pivot_table
   pry-rails
   rails (= 5.0.1)

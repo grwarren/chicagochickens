@@ -3,7 +3,7 @@ FactoryGirl.define do
     quantity 10
     delivery_date 1.week.from_now
     user_name 'Marques Marcello'
+    product_name 'Chicken Eggs'
     association :user
-    association :product
   end
 end

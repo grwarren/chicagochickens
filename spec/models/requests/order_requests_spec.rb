@@ -1,12 +1,12 @@
-require 'spec_helper'
+require 'rails_helper'
 
 include Requests
 
-describe  Requests::OrderRequest do
+describe Requests::OrderRequest do
   let(:product) { create :product }
   let(:user) { create :user }
-  let(:valid_params) { { quantity: 10, product: "#{product.id}", user: user } }
-  let(:invalid_params) { { product: "", quantity: 10, user: user } }
+  let(:valid_params) { {quantity: 10, product: "#{product.id}", user: user} }
+  let(:invalid_params) { {product: "", quantity: 10, user: user} }
 
   describe '#valid?' do
     it 'is invalid if product is missing in params' do
@@ -15,8 +15,8 @@ describe  Requests::OrderRequest do
     end
 
     it 'is invalid if product with given id does not exist' do
-      NoneExistent = 5050
-      order_request = Requests::OrderRequest.new params: { quantity: 10, product: "#{NoneExistent}", user: user }
+      NON_EXISTENT = 5050
+      order_request = Requests::OrderRequest.new params: {quantity: 10, product: "#{NON_EXISTENT}", user: user}
 
       expect(order_request.valid?).to be_falsey
       expect(order_request.errors.full_messages).to match_array(["Product does not exist"])
@@ -24,7 +24,7 @@ describe  Requests::OrderRequest do
 
     it 'invalid if no user is given' do
       Empty = nil
-      order_request = Requests::OrderRequest.new params: { quantity: 10, product: "#{product.id}", user: Empty }
+      order_request = Requests::OrderRequest.new params: {quantity: 10, product: "#{product.id}", user: Empty}
 
       expect(order_request.valid?).to be_falsey
       expect(order_request.errors.full_messages).to match_array(["User is not known"])

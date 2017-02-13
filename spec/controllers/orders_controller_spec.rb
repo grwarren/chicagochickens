@@ -2,7 +2,9 @@ require 'rails_helper'
 
 describe OrdersController, :type => :controller do
   let(:user) { create :user }
-  before(:each) do create :delivery_schedule end
+  before(:each) do
+    create :delivery_schedule
+  end
 
   describe 'GET /new' do
     let(:products) { create_list :product, 2 }
@@ -20,21 +22,21 @@ describe OrdersController, :type => :controller do
 
   describe 'POST /create' do
     let(:product) { create :product }
-    let(:valid_params) { { order: { quantity: 10, product: product.id, user_name: 'Marques Marcello' } , user_id: user.user_id } }
+    let(:valid_params) { {order: {quantity: 10, product: product.id, user_name: 'Marques Marcello'}, user_id: user.user_id} }
 
     describe 'valid params' do
       it 'saves new order' do
-        expect {  post :create,  valid_params }.to change(Order, :count).by(1)
+        expect { post :create, valid_params }.to change(Order, :count).by(1)
       end
 
       it 'saves order with ordered product' do
         expect_any_instance_of(Requests::OrderRequest).to receive(:save).and_return(true)
 
-        post :create,  valid_params
+        post :create, valid_params
       end
 
       it 'redirects to new order page after save' do
-        post :create,  valid_params
+        post :create, valid_params
 
         expect(flash[:notice]).to eql("Your order has been saved")
         expect(response).to redirect_to user_orders_path(user)
@@ -42,12 +44,12 @@ describe OrdersController, :type => :controller do
     end
 
     describe 'invalid params' do
-      let(:invalid_params) { { order: { quantity: 10, user_name: 'Marques Marcello', product: ''}, user_id: user.user_id } }
+      let(:invalid_params) { {order: {quantity: 10, user_name: 'Marques Marcello', product: ''}, user_id: user.user_id} }
 
       it 'renders new with errors when product is missing' do
         expected_errors = ["Product can't be blank"]
 
-        post :create,  invalid_params
+        post :create, invalid_params
 
         expect(response).to render_template(:new)
         expect(assigns :order).to_not be_valid
@@ -57,7 +59,7 @@ describe OrdersController, :type => :controller do
 
       it 'renders new with errors when user is missing' do
         expected_errors = ["User can't be blank", "User name can't be blank"]
-        post :create,  order: { quantity: 10, user_name: 'Marques Marcello', product: product.id }
+        post :create, order: {quantity: 10, user_name: 'Marques Marcello', product: product.id}
 
         expect(response).to render_template(:new)
         expect(assigns :order).to_not be_valid

@@ -27,7 +27,7 @@ describe UsersController, type: :controller do
   end
 
   describe "GET #users" do
-    let(:users)  { create_list :user, 2 }
+    let(:users) { create_list :user, 2 }
 
     it "returns http success" do
       get :index

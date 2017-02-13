@@ -1,7 +1,6 @@
 require 'spec_helper'
 require 'action_view/helpers'
 
-
 describe UsersHelper do
   let(:current_user) { build :user }
 
@@ -13,11 +12,11 @@ describe UsersHelper do
     it 'sets /orders when user :current_user is not set' do
       expect(helper.build_user_path(nil)).to eql(orders_path)
     end
-end
+  end
 
   describe '#user_orders_headers' do
     it 'shows generic header' do
-      expect(helper.user_orders_headers(nil)).to eql("Orders")
+      expect(helper.user_orders_headers(nil)).to eql('Orders')
     end
 
     it 'shows user specific header' do

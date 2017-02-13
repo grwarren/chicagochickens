@@ -25,7 +25,7 @@ RSpec.describe DeliverySchedulesController, type: :controller do
     end
 
     it 'saves new delivery_schedule' do
-      expect {  post :create,  delivery_schedule: valid_params }.to change(DeliverySchedule, :count).by(1)
+      expect { post :create, delivery_schedule: valid_params }.to change(DeliverySchedule, :count).by(1)
     end
   end
 
@@ -43,14 +43,14 @@ RSpec.describe DeliverySchedulesController, type: :controller do
 
     describe "PATCH #update" do
       it "returns http success" do
-        patch :update, id: schedule.id, delivery_schedule: { date: 2.weeks.from_now }
+        patch :update, id: schedule.id, delivery_schedule: {date: 2.weeks.from_now}
 
         expect(response).to redirect_to delivery_schedules_path
         expect(flash[:notice]).to eql("Delivery date has been updated.")
       end
 
       it 'updates the delivery_schedule' do
-        patch :update, id: schedule.id, delivery_schedule: { date: 2.weeks.from_now }
+        patch :update, id: schedule.id, delivery_schedule: {date: 2.weeks.from_now}
 
         expect(assigns(:delivery_schedule).reload.date.to_s).to eq 2.weeks.from_now.strftime("%Y-%m-%d")
       end
