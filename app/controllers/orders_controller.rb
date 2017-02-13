@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :current_user
-  before_action :set_products, only: [:new, :create, :index]
+  before_action :set_products, only: [:new, :create, :index, :myorders]
 
   def edit
     @orders = @current_user.orders.where(delivery_date: params[:deliveryDate])
@@ -17,10 +17,18 @@ class OrdersController < ApplicationController
      build_grid(@orders)
    end
 
+  def myorders
+    next_delivery_date = DeliverySchedule.where(:date.gte => Date.today).order_by(:date.asc).limit(1)
+    logger.debug("Order for next date: #{next_delivery_date.first.date}")
+    unless next_delivery_date.first.nil?
+      @orders = @current_user.orders.where(delivery_date: next_delivery_date.first.date)
+    end
+  end
+
   def next_order
     future_delivery_dates = DeliverySchedule.where(:date.gte => Date.today)
-    unless future_delivery_dates.first().nil?
-      next_delivery_date =  future_delivery_dates.first().date
+    unless future_delivery_dates.first.nil?
+      next_delivery_date =  future_delivery_dates.first.date
       @orders = Order.and({delivery_date:  next_delivery_date}, {quantity: { "$gt" => 0 }}).order_by(:product.asc, :user.asc)
       build_grid(@orders)
     end
