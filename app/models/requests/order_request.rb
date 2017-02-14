@@ -13,12 +13,12 @@ module Requests
 
     def order
       user = params[:user]
-      Order.new(quantity: params[:quantity], user: user, product_name: product.name, delivery_date: params[:delivery], user_name: user_name(user))
+      Order.new(quantity: params[:quantity], user: user, product_name: params[:product_name], delivery_date: params[:delivery], user_name: user_name(user))
     end
 
     private
     def product
-      Product.find_by(id: params[:product]) rescue nil
+      Product.find_by(name: params[:product_name]) rescue nil
     end
 
     def user_name(user)
@@ -26,11 +26,11 @@ module Requests
     end
 
     def product_exists?
-      errors.add(:product, "does not exist") if product.nil?
+      errors.add(:product, 'does not exist') if product.nil?
     end
 
     def params_completeness?
-      errors.add(:user, "is not known") if params[:user].nil?
+      errors.add(:user, 'is not known') if params[:user].nil?
     end
   end
 end

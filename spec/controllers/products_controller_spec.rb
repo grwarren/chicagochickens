@@ -6,7 +6,7 @@ RSpec.describe ProductsController, type: :controller do
     let(:product) { build :product }
 
     it "redirects to all product path" do
-      post :create, product: product.attributes
+      post :create, params: { product: product.attributes }
 
       expect(response).to redirect_to products_url
     end

@@ -7,7 +7,7 @@ FactoryGirl.define do
     name 'Marques Marcello'
     pickup_location 'TW'
     password 'pwd'
-    email 'x@y.com'
+    email { "x#{user_id}@y.com" }
 
     factory :user_with_orders do
       after(:build) do |user|
