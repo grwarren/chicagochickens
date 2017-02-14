@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'orders' => 'orders#index_all'
   get 'myorders' => 'orders#myorders'
   get '/users/:user_id/orders/edit' => 'orders#edit'
-  post 'orders' => 'orders#create'
+  # post 'orders' => 'orders#create'
   get 'nextOrder' => 'orders#next_order'
   patch '/users/:user_id/orders' => 'orders#update'
   # user login routes
