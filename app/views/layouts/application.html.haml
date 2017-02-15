@@ -29,8 +29,9 @@
           %a.navbar-brand{:href => "/"} Chicago Chickens
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav.navbar-right
-            %li.active
-              = link_to "Home", '/'
+            - if is_admin?
+              %li.active
+                = link_to "Home", '/'
             - if logged_in?
               %li #{link_to "Log out", logout_path, method: "delete"}
             - else

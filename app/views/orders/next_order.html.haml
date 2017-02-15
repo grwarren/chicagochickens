@@ -3,8 +3,9 @@
   - if !@orders.nil?
     .panel-heading
       %h3.panel-title
+        Next Order:
         =@orders.first.delivery_date
-        \- Current Orders
+
     .panel-body
       %table.table.table-bordered{:class => "orders"}
         %tr
@@ -12,11 +13,13 @@
           %th User
           %th.hidden-xs Quantity
           %th.hidden-sm.hidden-md.hidden-lg Qty
+          %th 
         - @orders.each do |order|
           %tr
-            %td{:class => "product_name"}= order.product.name
+            %td{:class => "product_name"}= order.product_name
             %td{:class => "user_name"}= order.user.name
             %td{:class => "quantity"}= order.quantity
+            %td
   - else
     .panel-body
       %p

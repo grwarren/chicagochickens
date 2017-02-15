@@ -2,21 +2,25 @@ class OrdersController < ApplicationController
   before_action :current_user
   before_action :set_products, only: [:new, :create, :index, :myorders]
 
+  # GET /users/1/orders/edit?deliveryDate=2017-03-10
   def edit
     @orders = @current_user.orders.where(delivery_date: params[:deliveryDate])
     build_grid(@orders)
   end
 
+  # GET /users/1/orders/new
   def new
     @orders = Responses::OrderResponse.new(user: @current_user).orders
     build_grid(@orders)
   end
 
+  # GET /orders
   def index_all
     @orders = Order.all.order_by(:delivery_date.desc, :product.asc)
     build_grid(@orders)
   end
 
+  # GET /myorders
   def myorders
     next_delivery_date = DeliverySchedule.where(:date.gte => Date.today).order_by(:date.asc).limit(1)
     logger.debug("Order for next date: #{next_delivery_date.first.date}")
@@ -25,11 +29,12 @@ class OrdersController < ApplicationController
     end
   end
 
+  # GET /nextOrder
   def next_order
     future_delivery_dates = DeliverySchedule.where(:date.gte => Date.today)
     unless future_delivery_dates.first.nil?
       next_delivery_date = future_delivery_dates.first.date
-      @orders = Order.and({delivery_date: next_delivery_date}, {quantity: {"$gt" => 0}}).order_by(:product.asc, :user.asc)
+      @orders = Order.and({delivery_date: next_delivery_date}, {quantity: {'$gt' => 0}}).order_by(:product.asc, :user.asc)
       build_grid(@orders)
     end
   end

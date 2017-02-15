@@ -5,12 +5,21 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'main#index'
+
+  # show all orders
   get 'orders' => 'orders#index_all'
+  # show only next order
+  get 'nextOrder' => 'orders#next_order'
+
+  # user main entry screen
   get 'myorders' => 'orders#myorders'
+
+  # get orders by delivery date for edit
   get '/users/:user_id/orders/edit' => 'orders#edit'
   # post 'orders' => 'orders#create'
-  get 'nextOrder' => 'orders#next_order'
+
   patch '/users/:user_id/orders' => 'orders#update'
+
   # user login routes
   get    '/signup' => 'users#new'
   get    '/login' => 'sessions#new'

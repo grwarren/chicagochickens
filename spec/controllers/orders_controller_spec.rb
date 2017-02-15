@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 describe OrdersController, :type => :controller do
-  let(:user) { create :user }
+
+  let(:user) { create :user_with_orders }
   before(:each) do
-    create :delivery_schedule
+    create :delivery_schedule, date: 1.week.from_now
   end
 
   describe 'GET /new' do
@@ -21,7 +22,7 @@ describe OrdersController, :type => :controller do
   end
 
   describe 'POST /create' do
-    
+
     let(:product) { create :product }
     let(:valid_params) { { order: { quantity: 10, product_name: product.name, user_name: 'Marques Marcello' }, user_id: user.user_id } }
 
@@ -72,6 +73,14 @@ describe OrdersController, :type => :controller do
         expect(assigns :products).to contain_exactly(product)
         expect(assigns(:order).errors.full_messages).to match_array(expected_errors)
       end
+    end
+  end
+
+  describe 'GET /next_order' do
+    it 'shows next order page' do
+      get :next_order
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:next_order)
     end
   end
 end
