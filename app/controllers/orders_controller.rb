@@ -48,17 +48,6 @@ class OrdersController < ApplicationController
 
   end
 
-  def create
-    params = order_params.merge(user: @current_user)
-    order_request = Requests::OrderRequest.new(params: params)
-    if order_request.save
-      redirect_to user_orders_path(@current_user), notice: 'Your order has been saved'
-    else
-      @order = order_request.order
-      render :new
-    end
-  end
-
   def update
     if @current_user.update(user_params)
       redirect_to user_orders_url(@current_user), notice: "Your orders were successfully updated."
