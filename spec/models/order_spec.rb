@@ -9,16 +9,21 @@ describe Order do
   it { is_expected.to belong_to(:user).of_type(User) }
 
   it { is_expected.to validate_presence_of(:user) }
-  it { is_expected.to validate_presence_of(:product_name) }
-  it { is_expected.to validate_presence_of(:quantity) }
+  it { is_expected.to validate_presence_of(:delivery_date) }
+ 
 
   describe 'save' do
     let(:order) { build :order }
 
-    it 'saves with product' do
+    it 'saves with order items' do
+      expect(order.order_items.size).to eql(2)
+
       expect { order.save }.to change(Order, :count).by(1)
 
       order.save
+
+      saved_order =  Order.find(order.id)
+      expect(saved_order.order_items.size).to eql(2)
     end
   end
 

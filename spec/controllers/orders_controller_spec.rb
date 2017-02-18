@@ -3,6 +3,7 @@ require 'rails_helper'
 describe OrdersController, :type => :controller do
 
   let(:user) { create :user_with_orders }
+  let(:new_order) { build :order }
   before(:each) do
     create :delivery_schedule, date: 1.week.from_now
   end
@@ -19,6 +20,13 @@ describe OrdersController, :type => :controller do
       expect(assigns :orders).to_not be_nil
       expect(assigns :products).to match_array(products)
     end
+
+    it 'should return index_all' do
+      get :index_all
+
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:index_all)
+    end
   end
 
   describe 'GET /next_order' do
@@ -26,6 +34,13 @@ describe OrdersController, :type => :controller do
       get :next_order
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:next_order)
+    end
+  end
+
+  describe 'POST /new' do
+    it 'should save new order with items' do
+      post :create, params: {user_id: user.user_id, order: new_order.attributes}
+      expect(response).to have_http_status(:success)
     end
   end
 end

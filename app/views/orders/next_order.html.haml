@@ -14,11 +14,11 @@
           %th.hidden-xs Quantity
           %th.hidden-sm.hidden-md.hidden-lg Qty
           %th 
-        - @orders.each do |order|
+        - @orders.first.order_items.each do |item|
           %tr
-            %td{:class => "product_name"}= order.product_name
-            %td{:class => "user_name"}= order.user.name
-            %td{:class => "quantity"}= order.quantity
+            %td{:class => "product_name"}= item.product_name
+            %td{:class => "user_name"}= item.order.user.name
+            %td{:class => "quantity"}= item.quantity
             %td
   - else
     .panel-body

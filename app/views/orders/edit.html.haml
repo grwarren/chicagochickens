@@ -6,22 +6,4 @@
       .alert.alert-warning{:role => "alert"}
         %strong No orders for this user
     - else
-      = form_for @current_user, url:user_orders_url , html: {class: "nifty_form"} do | f |
-        = f.text_field :user_id, type: "hidden"
-        = f.text_field :name, type: "hidden"
-        %table.table.table-bordered
-          %tr
-            %th &nbsp
-            - @grid.column_headers.each do |header|
-              %th= header.strftime("%b %d")
-          - @grid.rows.each do |row|
-            %tr
-              %td.h4= row.header
-              - row.data.each do |order|
-                =f.fields_for :orders, order do |o|
-                  %td
-                    = o.hidden_field :delivery_date
-                    = o.hidden_field :user_name
-                    = o.select :quantity, options_for_select(quantity_options_for(order.product_name), o.object.quantity)
-        .col-md-4
-          = submit_tag "Save", :class => "btn btn-primary"
+      = render 'form'

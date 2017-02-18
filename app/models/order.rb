@@ -3,13 +3,13 @@ class Order
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :quantity, type: Integer
   field :delivery_date, type: Date
   field :user_name, type: String
-  field :product_name, type: String
 
+  embeds_many(:order_items)
   belongs_to :user
 
-  validates_presence_of :user, :quantity, :user_name, :product_name
+  validates_presence_of :user, :delivery_date, :user_name
+  accepts_nested_attributes_for :order_items
 
 end

@@ -1,0 +1,24 @@
+= form_for @order, url:user_orders_url , html: {class: "nifty_form"} do | order_form |
+  = order_form.text_field :user_name
+  = order_form.text_field :delivery_date
+  = order_form.text_field :id
+
+  %table.table.table-bordered
+    %tr
+      %th &nbsp
+      %th &nbsp
+    - @order.order_items.each do |order_item|
+      = order_form.fields_for :order_items, order_item do |item_form|
+        %tr
+          %td.col-lg-3
+            = item_form.text_field :product_name
+          %td.col-lg-3
+            .input-group
+              = item_form.text_field :quantity, class: 'quantity form-control '
+              %span.input-group-btn
+                %a.btn.btn-default.order-minus-btn
+                  %span.glyphicon.glyphicon-minus-sign
+                %a.btn.btn-default.order-plus-btn
+                  %span.glyphicon.glyphicon-plus-sign
+  .col-md-4
+    = submit_tag "Save", :class => "btn btn-primary"

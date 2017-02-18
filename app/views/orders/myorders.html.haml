@@ -7,25 +7,26 @@
       .alert.alert-warning{:role => "alert"}
         %strong No orders for this user
     - else
-      = form_for @current_user, html: {class: "nifty_form"} do | f |
-        = f.hidden_field :user_id
-        = f.hidden_field :name
-        =f.fields_for :orders do |o|
-          .col-lg-3
-            = o.hidden_field :delivery_date
-            = o.hidden_field :user_name
-            .product
-              .row
-                .col-sm-4=o.text_field :product_name
-                -#.col-sm-4=o.text_field pluralize_units(o.quantity, o.product_name)
-                .col-sm-4 available
-                .input-group
-                  = o.text_field :quantity, class: 'quantity form-control '
-                  %span.input-group-btn
-                    %a.btn.btn-default.order-minus-btn
-                      %span.glyphicon.glyphicon-minus-sign
-                    %a.btn.btn-default.order-plus-btn
-                      %span.glyphicon.glyphicon-plus-sign
-
-
-
+      = form_for @current_user, html: {class: "nifty_form"} do | user_form |
+        = user_form.text_field :user_id
+        = user_form.hidden_field :name
+        - @current_user.orders.each do |order|
+          = user_form.fields_for :orders, order do |order_form|
+            .col-lg-3
+              = order_form.text_field :delivery_date
+              = order_form.hidden_field :user_name
+              = order.order_items.size
+              - order.order_items.each do |item|
+                = order_form.fields_for :order_item, item do |item_form|
+                  .product
+                    .row
+                      .col-sm-4=item_form.text_field :product_name
+                      -#.col-sm-4=o.text_field pluralize_units(o.quantity, o.product_name)
+                      .col-sm-4 available
+                      .input-group
+                        = item_form.text_field :quantity, class: 'quantity form-control '
+                        %span.input-group-btn
+                          %a.btn.btn-default.order-minus-btn
+                            %span.glyphicon.glyphicon-minus-sign
+                          %a.btn.btn-default.order-plus-btn
+                            %span.glyphicon.glyphicon-plus-sign

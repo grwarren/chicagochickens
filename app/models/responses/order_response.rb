@@ -10,8 +10,15 @@ module Responses
         all_orders = []
         delivery_dates.each do |delivery_date|
           users_orders = user.orders.where(delivery_date: delivery_date)
-          new_orders = products_for(users_orders).collect { |product| Order.new(user: user, product_name: product.name, quantity: 0, delivery_date: delivery_date, user_name: user.name) }
-          all_orders += users_orders + new_orders
+          if users_orders.first.nil?
+            order = Order.new(user: user, user_name: user.name, delivery_date: delivery_date)
+          else
+            order = users_orders.first
+          end
+          products_for(order).collect { |product|
+            OrderItem.new(order:order, product_name: product.name, quantity: 0)
+          }
+          all_orders += [order]
         end
         all_orders
       else
@@ -20,8 +27,8 @@ module Responses
     end
 
     private
-    def products_for(users_orders)
-      Product.nin(name: users_orders.map(&:product_name))
+    def products_for(users_order)
+      Product.nin(name: users_order.order_items.map(&:product_name))
     end
 
     def delivery_dates

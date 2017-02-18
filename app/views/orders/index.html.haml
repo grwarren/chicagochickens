@@ -20,18 +20,8 @@
           %tr
             %td.h4= row.header
             - row.data.each do |order|
-              %td= pluralize_units(order.quantity, order.product_name)
-
-      %table.table.table-bordered.hidden
-        %tr
-          %th Date
-          %th Product
-          %th Quantity
-        - @orders.each do |order|
-          %tr
-            %td= order.delivery_date
-            %td= order.product_name
-            %td= pluralize_units(order.quantity, order.product_name)
+              %td= order.quantity
+              -#%td= pluralize_units(order.quantity, order.product_name)
     - else
       %p
         No Orders found
