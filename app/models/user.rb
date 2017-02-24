@@ -13,12 +13,8 @@ class User
 
   attr_accessor :remember_token
 
-  has_many :orders
-
   validates_presence_of :user_id, :name, :email, :pickup_location
   validates_uniqueness_of :user_id, :email
-
-  accepts_nested_attributes_for :orders
 
   before_save { self.email = email.downcase }
 

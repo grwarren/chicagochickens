@@ -7,9 +7,8 @@ class Order
   field :user_name, type: String
 
   embeds_many(:order_items)
-  belongs_to :user
 
-  validates_presence_of :user, :delivery_date, :user_name
+  validates_presence_of :delivery_date, :user_name
   accepts_nested_attributes_for :order_items
 
 end

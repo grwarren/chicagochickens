@@ -23,7 +23,7 @@
             %td
               .btn-group
                 = link_to raw("<i class=\"glyphicon glyphicon-edit\"></i> Edit"), edit_user_path(user), :class => "btn btn-sm btn-default"
-                = link_to raw("<i class=\"glyphicon glyphicon-wrench\"></i> Orders"), user_orders_url(user.user_id), :class => "btn btn-sm btn-default"
+                = link_to raw("<i class=\"glyphicon glyphicon-wrench\"></i> Orders"), orders_url(), :class => "btn btn-sm btn-default"
                 = link_to raw("<i class=\"glyphicon glyphicon-trash\"></i> Delete"),  user_path(user), :method => :delete, :data => { :confirm => 'Are you sure?' } ,  :class => "btn btn-sm btn-default"
     - else
       %p

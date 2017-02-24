@@ -3,10 +3,9 @@ class OrdersController < ApplicationController
   before_action :set_products, only: [:new, :create, :index, :myorders]
 
   def create
-    params = order_params.merge(user: @current_user)
-    @order = Order.new(params)
+    @order = Order.new(order_params)
     if @order.save
-      redirect_to user_orders_url(@current_user), notice: "Your orders were successfully updated."
+      redirect_to orders_url(@current_user), notice: "Your orders were successfully updated."
     else
       render :new
     end
@@ -14,14 +13,13 @@ class OrdersController < ApplicationController
 
   # GET /users/1/orders/edit?deliveryDate=2017-03-10
   def edit
-    @orders = @current_user.orders.where(delivery_date: params[:deliveryDate])
+    @orders = Order.and({user_name: @current_user.name, delivery_date: params[:deliveryDate]})
     @order = @orders.first
   end
 
-  # GET /users/1/orders/new
+  # GET orders/new
   def new
-    @orders = Responses::OrderResponse.new(user: @current_user).orders
-    @order = @orders.first
+    @order = Responses::OrderResponse.new(user_name: @current_user.name).orders
   end
 
   # GET /orders
@@ -44,7 +42,7 @@ class OrdersController < ApplicationController
     future_delivery_dates = DeliverySchedule.where(:date.gte => Date.today)
     unless future_delivery_dates.first.nil?
       next_delivery_date = future_delivery_dates.first.date
-      @orders = Order.and({delivery_date: next_delivery_date}).order_by(:product.asc, :user.asc)
+      @orders = Order.and({user_name: @current_user.name, delivery_date: next_delivery_date}).order_by(:product.asc, :user.asc)
       build_grid(@orders)
     end
   end

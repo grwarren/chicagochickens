@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   # get orders by delivery date for edit
   get '/users/:user_id/orders/edit' => 'orders#edit'
+  
   # post 'orders' => 'orders#create'
 
   patch '/users/:user_id/orders' => 'orders#update'
@@ -27,9 +28,8 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy'
 
   resources :delivery_schedules
-  resources :users do
-    resources :orders
-  end
+  resources :orders
+  resources :users
   resources :products
 
 

@@ -2,7 +2,7 @@
   .panel-heading
     %h3.panel-title= user_orders_headers(@current_user)
   .panel-body
-    - if @orders.empty?
+    - if @order.nil?
       .alert.alert-warning{:role => "alert"}
         %strong No orders for this user
     - else

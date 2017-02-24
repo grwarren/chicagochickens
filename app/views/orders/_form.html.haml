@@ -1,4 +1,4 @@
-= form_for @order, url:user_orders_url , html: {class: "nifty_form"} do | order_form |
+= form_for @order, url:orders_url , html: {class: "nifty_form"} do | order_form |
   = order_form.text_field :user_name
   = order_form.text_field :delivery_date
   = order_form.text_field :id

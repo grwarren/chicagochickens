@@ -6,9 +6,7 @@ describe Order do
     expect(build :order).to be_valid
   end
 
-  it { is_expected.to belong_to(:user).of_type(User) }
-
-  it { is_expected.to validate_presence_of(:user) }
+  it { is_expected.to validate_presence_of(:user_name) }
   it { is_expected.to validate_presence_of(:delivery_date) }
  
 

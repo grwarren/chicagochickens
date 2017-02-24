@@ -10,11 +10,12 @@
           %th User
           %th Quantity
         - @orders.each do |order|
-          %tr
-            %td{:class => "delivery_date"}= order.delivery_date
-            %td{:class => "product_name"}= order.product_name
-            %td{:class => "user_name"}= order.user.name
-            %td{:class => "quantity"}= order.quantity
+          - order.order_items.each do |item|
+            %tr
+              %td{:class => "delivery_date"}= item.order.delivery_date
+              %td{:class => "product_name"}= item.product_name
+              %td{:class => "user_name"}= item.order.user_name
+              %td{:class => "quantity"}= item.quantity
     - else
       %p
         No Orders found

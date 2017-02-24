@@ -3,12 +3,12 @@ require 'rails_helper'
 
 describe 'Order Views', :type => :request  do
 
-  let(:user) { create :user_with_orders }
+  let(:order) { create :order }
   # TODO: create scenario adding user/orders from views
   
   before(:each) do
     create :delivery_schedule, date: 1.week.from_now
-    user.save
+    order.save
   end
   
   it 'should should render next order' do

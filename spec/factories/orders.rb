@@ -7,7 +7,6 @@ FactoryGirl.define do
   factory :order do
     delivery_date 1.week.from_now
     user_name 'Marques Marcello'
-    association :user
 
     after(:build) do | order|
       build(:order_item,  order: order)

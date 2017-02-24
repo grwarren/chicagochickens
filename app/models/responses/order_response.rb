@@ -2,33 +2,30 @@ module Responses
   class OrderResponse
     include ActiveAttr::Model
 
-    attribute :user
-    validates_presence_of :user
+    attribute :user_name
+    validates_presence_of :user_name
 
     def orders
       if valid?
-        all_orders = []
-        delivery_dates.each do |delivery_date|
-          users_orders = user.orders.where(delivery_date: delivery_date)
-          if users_orders.first.nil?
-            order = Order.new(user: user, user_name: user.name, delivery_date: delivery_date)
-          else
-            order = users_orders.first
-          end
-          products_for(order).collect { |product|
-            OrderItem.new(order:order, product_name: product.name, quantity: 0)
-          }
-          all_orders += [order]
+        next_delivery_date = DeliverySchedule.where(:date.gte => Date.today).order_by(:date.asc).limit(1).first.date
+        users_orders = Order.and({user_name: user_name, delivery_date: next_delivery_date})
+        if users_orders.size == 0
+          order = Order.new(user_name: user_name, delivery_date: next_delivery_date)
+        else
+          order = users_orders.first
         end
-        all_orders
+        products_for(order).collect { |product|
+          OrderItem.new(order:order, product_name: product.name, quantity: 0)
+        }
+        order
       else
-        []
+        nil
       end
     end
 
     private
-    def products_for(users_order)
-      Product.nin(name: users_order.order_items.map(&:product_name))
+    def products_for(order)
+      Product.nin(name: order.order_items.map(&:product_name))
     end
 
     def delivery_dates
