@@ -15,7 +15,7 @@
             -if header.past?
               %th= header.strftime("%b %d")
             -else
-              %th=link_to  header.strftime("%b %d"),  build_edit_path(@current_user.user_id, header)
+              %th=link_to  header.strftime("%b %d"),  build_edit_path(header)
         - @grid.rows.each do |row|
           %tr
             %td.h4= row.header

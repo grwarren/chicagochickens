@@ -1,6 +1,6 @@
 module UsersHelper
 
-  def build_edit_path(user_id, delivery_date)
+  def build_edit_path(delivery_date)
     "orders/edit?deliveryDate=#{delivery_date}"
   end
 

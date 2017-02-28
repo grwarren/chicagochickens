@@ -6,6 +6,7 @@ describe OrdersController, :type => :controller do
   let(:new_order) { build :order }
   before(:each) do
     create :delivery_schedule, date: 1.week.from_now
+    session[:user_id] = user._id
   end
 
   describe 'GET /new' do
@@ -40,6 +41,13 @@ describe OrdersController, :type => :controller do
   describe 'POST /new' do
     it 'should save new order with items' do
       post :create, params: {user_name: user.name, order: new_order.attributes}
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe 'GET /myorders' do
+    it 'should retreive all future orders for a user' do
+      get :myorders
       expect(response).to have_http_status(:success)
     end
   end

@@ -3,14 +3,14 @@ module Responses
     include ActiveAttr::Model
 
     attribute :user_name
-    validates_presence_of :user_name
+    attribute :delivery_date
+    validates_presence_of :user_name, :delivery_date
 
-    def orders
+    def order
       if valid?
-        next_delivery_date = DeliverySchedule.where(:date.gte => Date.today).order_by(:date.asc).limit(1).first.date
-        users_orders = Order.and({user_name: user_name, delivery_date: next_delivery_date})
+        users_orders = Order.and({user_name: user_name, delivery_date: delivery_date})
         if users_orders.size == 0
-          order = Order.new(user_name: user_name, delivery_date: next_delivery_date)
+          order = Order.new(user_name: user_name, delivery_date: delivery_date)
         else
           order = users_orders.first
         end

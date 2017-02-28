@@ -5,21 +5,20 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     if @order.save
-      redirect_to orders_url(@current_user), notice: "Your orders were successfully updated."
+      redirect_to orders_url(@current_user), notice: 'Your orders were successfully updated.'
     else
       render :new
     end
   end
 
-  # GET /users/1/orders/edit?deliveryDate=2017-03-10
+  # GET /orders/58afba6ed22b1d66bc7d9f1f/edit
   def edit
-    @orders = Order.and({user_name: @current_user.name, delivery_date: params[:deliveryDate]})
-    @order = @orders.first
+    @order = Order.find(params[:id])
   end
 
-  # GET orders/new
+  # GET orders/new?deliveryDate=2017-03-10
   def new
-    @order = Responses::OrderResponse.new(user_name: @current_user.name).orders
+    @order = Responses::OrderResponse.new(user_name: @current_user.name, delivery_date: params[:deliveryDate]).order
   end
 
   # GET /orders
@@ -30,11 +29,20 @@ class OrdersController < ApplicationController
 
   # GET /myorders
   def myorders
-    next_delivery_date = DeliverySchedule.where(:date.gte => Date.today).order_by(:date.asc).limit(1)
-    logger.debug("Order for next date: #{next_delivery_date.first.date}")
-    unless next_delivery_date.first.nil?
-      @orders = @current_user.orders.where(delivery_date: next_delivery_date.first.date)
+    @orders_map = {}
+
+    future_delivery_dates = DeliverySchedule.where(:date.gte => Date.today).order_by(:date.asc)
+    future_delivery_dates.each do | delivery |
+      order = Order.and({user_name: @current_user.name, delivery_date: delivery.date})
+      if order.length == 0
+        @orders_map[delivery.date] = nil
+      else
+        @orders_map[delivery.date] = order.first
+      end
     end
+
+    @orders = Order.and({user_name: @current_user.name, :delivery_date.gte => Date.today}).order_by(:delivery_date.asc)
+    logger.debug("Found #{@orders.count} existing orders")
   end
 
   # GET /nextOrder
@@ -49,7 +57,7 @@ class OrdersController < ApplicationController
 
   def index
     unless @current_user.nil?
-      @orders = @current_user.orders.order_by(:delivery_date.desc, :product.asc)
+      @orders = Order.order_by(:delivery_date.desc, :product.asc)
       build_grid(@orders)
     end
 
@@ -59,7 +67,7 @@ class OrdersController < ApplicationController
     params = order_params.merge(user: @current_user)
     @order = Order.find(params[:id])
     if @order.update(order_params)
-      redirect_to user_orders_url(@current_user), notice: "Your orders were successfully updated."
+      redirect_to orders_url(@current_user), notice: 'Your orders were successfully updated.'
     else
       render :edit
     end
