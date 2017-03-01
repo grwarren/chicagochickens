@@ -1,6 +1,6 @@
 .panel.panel-default
   .panel-heading
-    %h3.panel-title= user_orders_headers(@current_user)
+    %h3.panel-title= order_headers(@order)
   .panel-body
     - if @order.nil?
       .alert.alert-warning{:role => "alert"}

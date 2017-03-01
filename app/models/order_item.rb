@@ -8,7 +8,7 @@ class OrderItem
 
   embedded_in(:order)
 
-  validates_presence_of  :quantity, :product_name
+  validates_presence_of :quantity, :product_name
 
   def order_delivery_date
     order.delivery_date

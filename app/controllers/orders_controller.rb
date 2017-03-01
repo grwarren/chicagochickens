@@ -67,9 +67,18 @@ class OrdersController < ApplicationController
     params = order_params.merge(user: @current_user)
     @order = Order.find(params[:id])
     if @order.update(order_params)
-      redirect_to orders_url(@current_user), notice: 'Your orders were successfully updated.'
+      redirect_to myorders_path, notice: 'Your orders were successfully updated.'
     else
       render :edit
+    end
+  end
+
+  def destroy
+    @order = Order.find(params[:id])
+    if @order.destroy
+      redirect_to myorders_path, notice: "Order for #{@order.delivery_date} deleted"
+    else
+      render :myorders
     end
   end
 

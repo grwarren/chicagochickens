@@ -27,7 +27,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    puts "user_params = " + user_params.inspect
     if @user.update(user_params)
       redirect_to users_url, notice: "User #{@user.user_id} was successfully updated."
     else

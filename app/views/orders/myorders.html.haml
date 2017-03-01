@@ -9,8 +9,10 @@
     - else
       - @orders_map.each do |date, order|
         .order
-          =date
+          .col-xs-2.hidden-xs=date.strftime("%b %d")
+          .col-xs-2.hidden-sm.hidden-md.hidden-lg=date.strftime("%m/%d")
           - if order.nil?
             = link_to 'Add', "/orders/new?deliveryDate=#{date}"
           - else
-            = link_to 'Edit', "/orders/#{order.id}/edit"
+            = link_to 'Edit', edit_order_path(order.id)
+            = link_to 'Delete', "/orders/#{order.id}", method: :delete, data: { :confirm => 'Are you sure?' }
