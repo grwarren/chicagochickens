@@ -25,11 +25,5 @@ describe OrdersHelper do
       product_with_special_unit = create(:product, unit: 'Dozen')
       expect(helper.pluralize_units(TWO, product_with_special_unit.name)).to eq "#{TWO} Dozen"
     end
-
-    it 'adds product name when product has no unit' do
-      product_with_no_units = create(:product, name: 'Geese Eggs', unit: '')
-
-      expect(helper.pluralize_units(TWO, product_with_no_units.name)).to eq "#{TWO} #{product_with_no_units.name}"
-    end
   end
 end

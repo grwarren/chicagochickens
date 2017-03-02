@@ -5,9 +5,10 @@ class Product
 
   field :name, type: String
   field :unit, type: String
+  field :price, type: Integer
   field :sort_order, type: Integer
 
-  validates_presence_of :name
+  validates_presence_of :name, :unit, :price
 
   def <=>(other)
     # use Array#<=> to compare the attributes

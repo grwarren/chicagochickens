@@ -8,6 +8,10 @@
     .col-sm-8
       = f.text_field :unit, { class: "form-control"}
   .form-group
+    = label_tag :price, "Price",  { class: "col-sm-2 control-label"}
+    .col-sm-8
+      = f.text_field :price, { class: "form-control"}
+  .form-group
     = label_tag :sort_order, "Sort Order",  { class: "col-sm-2 control-label"}
     .col-sm-8
       = f.text_field :sort_order, { class: "form-control"}
