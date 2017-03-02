@@ -8,10 +8,10 @@
       = order_form.fields_for :order_items, order_item do |item_form|
         %tr
           %td.col-lg-3
-            = order_item.product_name
+            =item_form.hidden_field :product_name
+            ="#{order_item.product_name} (#{@products[order_item.product_name].unit})"
           %td.col-lg-3
             .input-group
-              .item-count= pluralize_units(order_item.quantity, order_item.product_name)
               = item_form.text_field :quantity, class: 'quantity form-control '
               %span.input-group-btn
                 %a.btn.btn-default.order-minus-btn

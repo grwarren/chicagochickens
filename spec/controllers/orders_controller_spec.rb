@@ -13,13 +13,12 @@ describe OrdersController, :type => :controller do
     let(:products) { create_list :product, 2 }
 
     it 'shows new order page with new order and products' do
-      get :new, params: { user_id: user.user_id }
+      get :new, params: { deliveryDate: 1.week.from_now  }
 
       expect(response).to have_http_status(:success)
       expect(response).to render_template(:new)
 
-      expect(assigns :orders).to_not be_nil
-      expect(assigns :products).to match_array(products)
+      expect(assigns :order).to_not be_nil
     end
 
     it 'should return index_all' do
@@ -41,7 +40,7 @@ describe OrdersController, :type => :controller do
   describe 'POST /new' do
     it 'should save new order with items' do
       post :create, params: {user_name: user.name, order: new_order.attributes}
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:found)
     end
   end
 

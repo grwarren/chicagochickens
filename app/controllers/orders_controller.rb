@@ -1,13 +1,13 @@
 class OrdersController < ApplicationController
   before_action :current_user
-  before_action :set_products, only: [:new, :create, :index, :myorders]
+  before_action :set_products, only: [:new, :create, :edit, :index, :myorders]
 
   def create
     @order = Order.new(order_params)
     if @order.save
-      redirect_to orders_url(@current_user), notice: 'Your orders were successfully updated.'
+      redirect_to myorders_path, notice: 'Your orders were successfully updated.'
     else
-      render :new
+      render :new,  notice: @order.errors
     end
   end
 
@@ -103,7 +103,8 @@ class OrdersController < ApplicationController
   end
 
   def set_products
-    @products = Product.all.order_by(:sort_order.asc)
+    products = Product.all.order_by(:sort_order.asc)
+    @products = Hash[products.map{|p|[p.name, p]}]
   end
 
 end
